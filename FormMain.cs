@@ -16,6 +16,8 @@ namespace CMS
 {
     public partial class FormMain : Form
     {
+        bool menu_show = false;
+        int menu_size = 0;
         public FormMain()
         {
             InitializeComponent();
@@ -28,6 +30,32 @@ namespace CMS
 
         private void FormMain_Load(object sender, EventArgs e)
         {
+            fillTable();
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            if (!menu_show)
+            {
+                mainGridView.Width = mainGridView.Width - menu_size;
+                jobMenu.Width = menu_size;
+                menu_show =! menu_show;
+            }
+            else
+            {
+                mainGridView.Width = mainGridView.Width + menu_size;
+                jobMenu.Width = 0;
+                menu_show = !menu_show;
+            }
+            
+        }
+
+        private void fillTable()
+        {
+            this.certificationsTableAdapter.Fill(this.certificationsDatabaseDataSet.Certifications);
+            menu_size = jobMenu.Width;
+            jobMenu.Width = 0;
+
             string conStr = ConfigurationManager.ConnectionStrings["CMS.Properties.Settings.CertificationsDatabaseConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(conStr);
             con.Open();
@@ -54,21 +82,29 @@ namespace CMS
             }
 
             dr.Close();
-            cmd.CommandText =   "select Employees.name, Certifications.Name" +
+            cmd.CommandText = "select Employees.name, Certifications.Name, EmployeeCertification.Expiration_Date," +
+                                " EmployeeCertification.Expiration_Date, EmployeeCertification.Additional_Info" +
                                 " from Certifications" +
                                 " join EmployeeCertification on Certifications.Id = EmployeeCertification.CertificationId" +
                                 " join Employees on Employees.Id = EmployeeCertification.EmployeeId";
             dr = cmd.ExecuteReader();
-            
+
             while (dr.Read())
             {
                 int index;
                 employeeListIndex.TryGetValue(dr[0].ToString(), out index);
-                mainGridView.Rows[index].Cells[dr[1].ToString()].Value = "Have";
+                if (!DBNull.Value.Equals(dr[2]))
+                {
+                    mainGridView.Rows[index].Cells[dr[1].ToString()].Value = Convert.ToDateTime(dr[2]).ToShortDateString();
+                }
+                else
+                {
+                    mainGridView.Rows[index].Cells[dr[1].ToString()].Value = "Have";
+                }
+                    
             }
             dr.Close();
             con.Close();
-
         }
     }
 }
