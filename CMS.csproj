@@ -66,6 +66,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CertificationsDatabaseDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="EmployeeChanges.cs" />
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
