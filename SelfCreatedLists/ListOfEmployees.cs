@@ -8,13 +8,17 @@ namespace CMS.SelfCreatedLists
 {
     class ListOfEmployees
     {
-        public List<String> names;
-        public List<List<String>> cert;
+        public List<String> names = new List<String>();
+        public List<List<String>> cert = new List<List<String>>();
 
         public ListOfEmployees()
         {
-            names = new List<String>();
-            cert = new List<List<String>>();
+        }
+
+        public void ClearList()
+        {
+            names.Clear();
+            cert.Clear();
         }
     }
 }
