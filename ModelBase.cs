@@ -16,7 +16,7 @@ namespace CMS
         private SqlCommand cmd = new SqlCommand();
         private SqlDataReader dr;
 
-        private int nrOfDiffCert;
+        private int nrOfDiffCert;  //Holds the number of different cert the job requests.
         ListOfEmployees employees = new ListOfEmployees();
         ListOfOutPutsFromModelBase result = new ListOfOutPutsFromModelBase();
 
@@ -25,6 +25,15 @@ namespace CMS
         {
             nrOfDiffCert = 0;
         }
+
+        /// <summary>
+        /// Checks and saves how many of each employees with right cert we have.
+        /// Listing their names and amount per cert.
+        /// </summary>
+        /// <param name="certForJob"></param>  Job request details
+        /// <param name="hoursToCompleteJob"></param> Hours it should take to complete job
+        /// <param name="reqDaysToFinishJob"></param> Number of days we have available.
+        /// <returns></returns>
         public String CheckJobReqWithEmployees(List<JobCertReqList> certForJob, int hoursToCompleteJob, int reqDaysToFinishJob)
         {
             List<int> certIndex = new List<int>();
@@ -61,6 +70,10 @@ namespace CMS
             return "";
         }
 
+        /// <summary>
+        /// Just calculates the number of employees with right cert we have in 
+        /// total and per certificate.
+        /// </summary>
         private void calcCertNeeded()
         {
             int count = 0;
@@ -76,6 +89,12 @@ namespace CMS
             needToTrainMorePeople(total);
         }
 
+        /// <summary>
+        /// Calculates how much time our available employees with right cert can work
+        /// and checks it against the request time limit.
+        /// </summary>
+        /// <param name="hoursToCompleteJob"></param>
+        /// <param name="reqDaysToFinishJob"></param>
         private void calcTotalWorksHoursAvailable(int hoursToCompleteJob, int reqDaysToFinishJob)
         {
             for (int i = 0; i < result.howManyOfEachCertExists.Count; i++)
@@ -99,6 +118,10 @@ namespace CMS
             }
         }
 
+        /// <summary>
+        /// Gets all the employees names and certs from database and put them
+        /// into the "ListOfEmployees"
+        /// </summary>
         private void GetListOfEmployessFromDataBase()
         {
             int nrOfNames = 0;
@@ -169,9 +192,13 @@ namespace CMS
             con.Close();
         }
 
+        /// <summary>
+        /// Clears all the lists and variables.
+        /// </summary>
         public void clearEmployeeList()
         {
             employees.ClearList();
+            //result.clearList();
             nrOfDiffCert = 0;
         }
     }

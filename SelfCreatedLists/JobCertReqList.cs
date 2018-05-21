@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace CMS.SelfCreatedLists
 {
+    /// <summary>
+    /// All the certification requests from the GUI,
+    /// This holds a single cert and how many people with that cert are needed.
+    /// </summary>
     public class JobCertReqList
     {
         public String Certificate { get; set; }
