@@ -724,6 +724,10 @@ namespace CMS
             comboAllCerts.DisplayMember = "Value";
             comboAllCerts.ValueMember = "Key";
 
+            comboBox1.Items.Clear();
+            comboBox1.DisplayMember = "Value";
+            comboBox1.ValueMember = "Key";
+
             con.Open();
 
             cmd.CommandText = "select Id, Name" +
@@ -734,6 +738,7 @@ namespace CMS
             {
                 comboBoxCerts.Items.Add(new KeyValuePair<string, string>(dr[0].ToString(), dr[1].ToString()));
                 comboAllCerts.Items.Add(new KeyValuePair<string, string>(dr[0].ToString(), dr[1].ToString()));
+                comboBox1.Items.Add(new KeyValuePair<string, string>(dr[0].ToString(), dr[1].ToString()));
             }
 
             dr.Close();
@@ -741,6 +746,16 @@ namespace CMS
 
             comboBoxCerts.SelectedIndex = 0;
             comboAllCerts.SelectedIndex = 0;
+            comboBox1.SelectedIndex = 0;
+        }
+
+        private void button1_Click_2(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedIndex >= 0 && menu_job_show)
+            {
+                KeyValuePair<string, string> item = (KeyValuePair<string, string>)comboBox1.SelectedItem;
+                listBox1.Items.Add(item.Value + " : " + textBox1.Text);
+            }
         }
     }
 }
