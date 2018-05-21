@@ -12,6 +12,9 @@ using System.Data.SqlClient;
 
 using System.Diagnostics;
 
+
+using CMS.SelfCreatedLists;
+
 namespace CMS
 {
     public partial class FormMain : Form
@@ -30,6 +33,8 @@ namespace CMS
 
         EmployeeChanges employee = new EmployeeChanges();
 
+        ModelBase mBase = new ModelBase();
+
         public FormMain()
         {
             InitializeComponent();
@@ -39,6 +44,89 @@ namespace CMS
         {
             this.Close();
         }
+
+        //private void test34()
+        //{
+        //
+        //    mBase.CheckJobReqWithEmployees();
+        //    mBase.clearEmployeeList();
+        //    mBase.CheckJobReqWithEmployees();
+        //
+        //
+        //    /*
+        //    int certIndexInList = 0;
+        //    int nrOfNames = 0;
+        //    int nrOfDiffCert = 0;
+        //
+        //    employees.cert.Add(new List<String>());
+        //
+        //    con.Open();
+        //
+        //    string sqlQuery = "select Name from Certifications";
+        //    cmd = new SqlCommand(sqlQuery, con);
+        //    dr = cmd.ExecuteReader();
+        //    while (dr.Read())
+        //    {
+        //        nrOfDiffCert++;
+        //        employees.cert[certIndexInList].Add(dr["Name"].ToString());
+        //    }
+        //    dr.Close();
+        //
+        //    cmd.CommandText = "select Name from Employees";
+        //    dr = cmd.ExecuteReader();
+        //
+        //    Dictionary<string, int> employeeListIndex = new Dictionary<string, int>();
+        //    while (dr.Read())
+        //    {
+        //        employees.names.Add(dr[0].ToString());
+        //        employees.cert.Add(new List<String>());
+        //        nrOfNames++;
+        //
+        //        int index = nrOfNames - 1;
+        //        employeeListIndex.Add(dr[0].ToString(), index);
+        //    }
+        //
+        //    dr.Close();
+        //
+        //    for (int i = 1; i < nrOfNames + 1; i++)
+        //    {
+        //        for (int j = 0; j < nrOfDiffCert; j++)
+        //        {
+        //            employees.cert[i].Add("0");
+        //        }
+        //    }
+        //
+        //
+        //    cmd.CommandText = "select Employees.name, Certifications.Name, EmployeeCertification.Expiration_Date," +
+        //                        " EmployeeCertification.Expiration_Date, EmployeeCertification.Additional_Info" +
+        //                        " from Certifications" +
+        //                        " join EmployeeCertification on Certifications.Id = EmployeeCertification.CertificationId" +
+        //                        " join Employees on Employees.Id = EmployeeCertification.EmployeeId";
+        //    dr = cmd.ExecuteReader();
+        //
+        //    while (dr.Read())
+        //    {
+        //        int index;
+        //        employeeListIndex.TryGetValue(dr[0].ToString(), out index);
+        //        //if (DBNull.Value.Equals(dr[2]))
+        //        //{
+        //            String tmp = dr[1].ToString();
+        //            for (int i = 0; i < nrOfDiffCert; i++)
+        //            {
+        //                if (employees.cert[0][i].Contains(tmp))
+        //                {
+        //                    employees.cert[index + 1][i] = "1";
+        //                    i = nrOfDiffCert;
+        //                }
+        //            }
+        //        //}
+        //
+        //    }
+        //
+        //    dr.Close();
+        //    con.Close();
+        //    */
+        //}
 
         private void FormMain_Load(object sender, EventArgs e)
         {
