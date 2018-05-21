@@ -78,6 +78,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SelfCreatedLists\JobCertReqList.cs" />
     <Compile Include="SelfCreatedLists\ListOfEmployees.cs" />
+    <Compile Include="SelfCreatedLists\ListOfOutPutsFromModelBase.cs" />
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
