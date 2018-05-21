@@ -797,7 +797,9 @@ namespace CMS
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            int hoursForWork = int.Parse(textBox2.Text);
+            int daysRequested = int.Parse(textBox3.Text);
+            //reqCert for Certs required
         }
     }
 }
