@@ -35,6 +35,7 @@ namespace CMS
         public FormMain()
         {
             InitializeComponent();
+            //test34();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -42,6 +43,29 @@ namespace CMS
             this.Close();
         }
 
+<<<<<<< HEAD
+=======
+        private void test34()
+        {
+            JobCertReqList t1 = new JobCertReqList();
+            JobCertReqList t2 = new JobCertReqList();
+            JobCertReqList t3 = new JobCertReqList();
+            t1.Certificate = "EON";
+            t1.Count = 2;
+            t2.Certificate = "Atlas Copco";
+            t2.Count = 2;
+            t3.Certificate = "Svetsa kunnig";
+            t3.Count = 3;
+
+            List<JobCertReqList> certForJob = new List<JobCertReqList>();
+            certForJob.Add(t1);
+            certForJob.Add(t2);
+            certForJob.Add(t3);
+
+            mBase.CheckJobReqWithEmployees(certForJob, 150, 25);
+        }
+
+>>>>>>> Modelbase
         private void FormMain_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'certificationsDatabaseDataSet.Certifications' table. You can move, or remove it, as needed.

@@ -44,5 +44,16 @@ namespace CMS.SelfCreatedLists
             costToTrainMorePeople = 0;
             canCompleteInReqDays = false;
         }
+
+        public void ClearList()
+        {
+            reqForTheJob.Clear();
+            namesWithCert.Clear();
+            howManyOfEachCertExists.Clear();
+            howManyMoreOfEachCertNeeded.Clear();
+            timeNeeded = 0;
+            costToTrainMorePeople = 0;
+            canCompleteInReqDays = false;
+        }
     }
 }
