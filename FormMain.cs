@@ -38,6 +38,7 @@ namespace CMS
         public FormMain()
         {
             InitializeComponent();
+            test34();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -45,88 +46,25 @@ namespace CMS
             this.Close();
         }
 
-        //private void test34()
-        //{
-        //
-        //    mBase.CheckJobReqWithEmployees();
-        //    mBase.clearEmployeeList();
-        //    mBase.CheckJobReqWithEmployees();
-        //
-        //
-        //    /*
-        //    int certIndexInList = 0;
-        //    int nrOfNames = 0;
-        //    int nrOfDiffCert = 0;
-        //
-        //    employees.cert.Add(new List<String>());
-        //
-        //    con.Open();
-        //
-        //    string sqlQuery = "select Name from Certifications";
-        //    cmd = new SqlCommand(sqlQuery, con);
-        //    dr = cmd.ExecuteReader();
-        //    while (dr.Read())
-        //    {
-        //        nrOfDiffCert++;
-        //        employees.cert[certIndexInList].Add(dr["Name"].ToString());
-        //    }
-        //    dr.Close();
-        //
-        //    cmd.CommandText = "select Name from Employees";
-        //    dr = cmd.ExecuteReader();
-        //
-        //    Dictionary<string, int> employeeListIndex = new Dictionary<string, int>();
-        //    while (dr.Read())
-        //    {
-        //        employees.names.Add(dr[0].ToString());
-        //        employees.cert.Add(new List<String>());
-        //        nrOfNames++;
-        //
-        //        int index = nrOfNames - 1;
-        //        employeeListIndex.Add(dr[0].ToString(), index);
-        //    }
-        //
-        //    dr.Close();
-        //
-        //    for (int i = 1; i < nrOfNames + 1; i++)
-        //    {
-        //        for (int j = 0; j < nrOfDiffCert; j++)
-        //        {
-        //            employees.cert[i].Add("0");
-        //        }
-        //    }
-        //
-        //
-        //    cmd.CommandText = "select Employees.name, Certifications.Name, EmployeeCertification.Expiration_Date," +
-        //                        " EmployeeCertification.Expiration_Date, EmployeeCertification.Additional_Info" +
-        //                        " from Certifications" +
-        //                        " join EmployeeCertification on Certifications.Id = EmployeeCertification.CertificationId" +
-        //                        " join Employees on Employees.Id = EmployeeCertification.EmployeeId";
-        //    dr = cmd.ExecuteReader();
-        //
-        //    while (dr.Read())
-        //    {
-        //        int index;
-        //        employeeListIndex.TryGetValue(dr[0].ToString(), out index);
-        //        //if (DBNull.Value.Equals(dr[2]))
-        //        //{
-        //            String tmp = dr[1].ToString();
-        //            for (int i = 0; i < nrOfDiffCert; i++)
-        //            {
-        //                if (employees.cert[0][i].Contains(tmp))
-        //                {
-        //                    employees.cert[index + 1][i] = "1";
-        //                    i = nrOfDiffCert;
-        //                }
-        //            }
-        //        //}
-        //
-        //    }
-        //
-        //    dr.Close();
-        //    con.Close();
-        //    */
-        //}
+        private void test34()
+        {
+            JobCertReqList t1 = new JobCertReqList();
+            JobCertReqList t2 = new JobCertReqList();
+            JobCertReqList t3 = new JobCertReqList();
+            t1.Certificate = "EON";
+            t1.Count = 2;
+            t2.Certificate = "Atlas Copco";
+            t2.Count = 2;
+            t3.Certificate = "Svetsa kunnig";
+            t3.Count = 3;
+
+            List<JobCertReqList> certForJob = new List<JobCertReqList>();
+            certForJob.Add(t1);
+            certForJob.Add(t2);
+            certForJob.Add(t3);
+
+            mBase.CheckJobReqWithEmployees(certForJob, 150, 25);
+        }
 
         private void FormMain_Load(object sender, EventArgs e)
         {
