@@ -31,6 +31,7 @@ namespace CMS
 
         EmployeeChanges employee = new EmployeeChanges();
         List<JobCertReqList> reqCert;
+        ModelBase mBase = new ModelBase();
 
         public FormMain()
         {
@@ -43,8 +44,6 @@ namespace CMS
             this.Close();
         }
 
-<<<<<<< HEAD
-=======
         private void test34()
         {
             JobCertReqList t1 = new JobCertReqList();
@@ -65,7 +64,6 @@ namespace CMS
             mBase.CheckJobReqWithEmployees(certForJob, 150, 25);
         }
 
->>>>>>> Modelbase
         private void FormMain_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'certificationsDatabaseDataSet.Certifications' table. You can move, or remove it, as needed.
