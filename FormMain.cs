@@ -801,5 +801,14 @@ namespace CMS
             int daysRequested = int.Parse(textBox3.Text);
             //reqCert for Certs required
         }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+            (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+        }
     }
 }
