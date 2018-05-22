@@ -28,10 +28,11 @@ namespace CMS.SelfCreatedLists
     /// 
     /// -costToTrainMorePeople says the cost of training more people.
     /// </summary>
-    class ListOfOutPutsFromModelBase
+    public class ListOfOutPutsFromModelBase
     {
         public List<JobCertReqList> reqForTheJob;
-        public List<String> namesWithCert = new List<String>();
+        //public List<String> namesWithCert = new List<String>();
+        public List<ChoosenEmployee> listOfAvailableEmpoyees = new List<ChoosenEmployee>();
         public List<int> howManyOfEachCertExists = new List<int>();
         public List<int> howManyMoreOfEachCertNeeded = new List<int>();
         public bool canCompleteInReqDays;
@@ -48,7 +49,8 @@ namespace CMS.SelfCreatedLists
         public void ClearList()
         {
             reqForTheJob.Clear();
-            namesWithCert.Clear();
+            //namesWithCert.Clear();
+            listOfAvailableEmpoyees.Clear();
             howManyOfEachCertExists.Clear();
             howManyMoreOfEachCertNeeded.Clear();
             timeNeeded = 0;
