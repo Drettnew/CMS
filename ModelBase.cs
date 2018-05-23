@@ -17,8 +17,8 @@ namespace CMS
         private SqlDataReader dr;
 
         private int nrOfDiffCert;  //Holds the number of different cert the job requests.
-        ListOfEmployee employees = new ListOfEmployee();
-        ListOfOutPutsFromModelBase result = new ListOfOutPutsFromModelBase();
+        private ListOfEmployee employees = new ListOfEmployee();
+        private ListOfOutPutsFromModelBase result = new ListOfOutPutsFromModelBase();
 
 
         public ModelBase()
@@ -94,7 +94,6 @@ namespace CMS
                 if (!newEmployeeFound)
                 {
                     result.listOfAvailableEmpoyees.Add(new ChoosenEmployee(name, id, newList)); 
-                        
                 }
                 name = "";
                 id = -1;
@@ -268,8 +267,18 @@ namespace CMS
                 }
 
             }
+
+            costToAddOnPrice(listOfCost, certIndex);
         }
 
+
+        private void costToAddOnPrice(List<int> listOfCost, List<int> certIndex)
+        {
+            for(int i = 0; i < result.reqForTheJob.Count; i++)
+            {
+                result.costToAddForEachCert.Add((listOfCost[certIndex[i]] / 1920.0) * result.reqForTheJob[i].Count);
+            }
+        }
 
         /// <summary>
         /// Clears all the lists and variables.
