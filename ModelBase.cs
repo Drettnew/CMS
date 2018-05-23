@@ -238,22 +238,24 @@ namespace CMS
             List<int> listOfCost = new List<int>();
             String tmp = "";
 
-            if(nrOfPeopleNeeded > 0)
-            {
-                con.Open();
-                int x = 0;
+            con.Open();
+            int x = 0;
 
-                string sqlQuery = "select Cost from Certifications";
-                cmd = new SqlCommand(sqlQuery, con);
-                dr = cmd.ExecuteReader();
-                while (dr.Read())
-                {
-                    tmp = dr["Cost"].ToString();
-                    x = Int32.Parse(tmp);
-                    listOfCost.Add(x);
-                }
-                dr.Close();
-                con.Close();
+            string sqlQuery = "select Cost from Certifications";
+            cmd = new SqlCommand(sqlQuery, con);
+            dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                tmp = dr["Cost"].ToString();
+                x = Int32.Parse(tmp);
+                listOfCost.Add(x);
+            }
+            dr.Close();
+            con.Close();
+
+
+            if (nrOfPeopleNeeded > 0)
+            {
                 for(int i = 0; i < result.howManyMoreOfEachCertNeeded.Count; i++)
                 {
                     if (result.howManyMoreOfEachCertNeeded[i] > 0)
@@ -268,7 +270,6 @@ namespace CMS
 
             costToAddOnPrice(listOfCost, certIndex, hoursPredictedToCompleteJob);
         }
-
 
         private void costToAddOnPrice(List<int> listOfCost, List<int> certIndex, int hoursPredictedToCompleteJob)
         {
