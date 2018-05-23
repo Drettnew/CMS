@@ -277,6 +277,7 @@ namespace CMS
             for(int i = 0; i < result.reqForTheJob.Count; i++)
             {
                 result.costToAddForEachCert.Add(((listOfCost[certIndex[i]] / 1920.0) * hoursPredictedToCompleteJob) * result.reqForTheJob[i].Count);
+                result.totalCostForCert += ((listOfCost[certIndex[i]] / 1920.0) * hoursPredictedToCompleteJob) * result.reqForTheJob[i].Count;
             }
         }
 

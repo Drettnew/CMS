@@ -876,6 +876,8 @@ namespace CMS
                         }
                     }
                 }
+
+                totalCertCostLabel.Text = result.totalCostForCert.ToString() + " kr ";
             }
             else
             {

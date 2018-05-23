@@ -84,6 +84,8 @@
             this.buttonCertNew = new System.Windows.Forms.Button();
             this.comboBoxCerts = new System.Windows.Forms.ComboBox();
             this.buttonCerts = new System.Windows.Forms.Button();
+            this.label12 = new System.Windows.Forms.Label();
+            this.totalCertCostLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.mainGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.certificationsDatabaseDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.certificationsDatabaseDataSet)).BeginInit();
@@ -154,6 +156,8 @@
             // 
             this.jobMenu.BackColor = System.Drawing.SystemColors.ControlLight;
             this.jobMenu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.jobMenu.Controls.Add(this.totalCertCostLabel);
+            this.jobMenu.Controls.Add(this.label12);
             this.jobMenu.Controls.Add(this.PanelMissingCertMain);
             this.jobMenu.Controls.Add(this.varning1);
             this.jobMenu.Controls.Add(this.listBoxReqCert);
@@ -627,6 +631,26 @@
             this.buttonCerts.UseVisualStyleBackColor = true;
             this.buttonCerts.Click += new System.EventHandler(this.buttonCerts_Click);
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(10, 223);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(145, 13);
+            this.label12.TabIndex = 17;
+            this.label12.Text = "Cost for all Certifications used";
+            // 
+            // totalCertCostLabel
+            // 
+            this.totalCertCostLabel.AutoSize = true;
+            this.totalCertCostLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.totalCertCostLabel.Location = new System.Drawing.Point(13, 240);
+            this.totalCertCostLabel.MinimumSize = new System.Drawing.Size(145, 0);
+            this.totalCertCostLabel.Name = "totalCertCostLabel";
+            this.totalCertCostLabel.Size = new System.Drawing.Size(145, 15);
+            this.totalCertCostLabel.TabIndex = 18;
+            this.totalCertCostLabel.Text = "label13";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -720,6 +744,8 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label labelCost;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label totalCertCostLabel;
+        private System.Windows.Forms.Label label12;
     }
 }
 
