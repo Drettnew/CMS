@@ -238,7 +238,6 @@ namespace CMS
         {
             List<int> listOfCost = new List<int>();
             String tmp = "";
-            int totalCost = 0;
 
             if(nrOfPeopleNeeded > 0)
             {
@@ -258,15 +257,15 @@ namespace CMS
                 con.Close();
                 for(int i = 0; i < result.howManyMoreOfEachCertNeeded.Count; i++)
                 {
-                    if(result.howManyMoreOfEachCertNeeded[i] > 0)
+                    if (result.howManyMoreOfEachCertNeeded[i] > 0)
                     {
-                        totalCost += listOfCost[certIndex[i]] * result.howManyMoreOfEachCertNeeded[i];
+                        result.costToTrainMorePeople.Add(listOfCost[certIndex[i]] * result.howManyMoreOfEachCertNeeded[i]);
                     }
+                    else
+                        result.costToTrainMorePeople.Add(0);
                 }
 
             }
-
-            result.costToTrainMorePeople = totalCost;
         }
 
 
