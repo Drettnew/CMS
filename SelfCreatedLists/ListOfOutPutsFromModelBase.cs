@@ -38,12 +38,14 @@ namespace CMS.SelfCreatedLists
         public bool canCompleteInReqDays;
         public int timeNeeded;
         public int costToTrainMorePeople;
+        public int nrOfActualPeopleFound;
 
         public ListOfOutPutsFromModelBase()
         {
             timeNeeded = 0;
             costToTrainMorePeople = 0;
             canCompleteInReqDays = false;
+            nrOfActualPeopleFound = 0;
         }
 
         public void ClearList()
@@ -55,6 +57,7 @@ namespace CMS.SelfCreatedLists
             timeNeeded = 0;
             costToTrainMorePeople = 0;
             canCompleteInReqDays = false;
+            nrOfActualPeopleFound = 0;
         }
     }
 }
