@@ -225,6 +225,8 @@ namespace CMS
                 count = result.reqForTheJob[i].Count - result.howManyOfEachCertExists[i];
                 if (count < 0)
                     count = 0;
+                if (count > 0)
+                    result.moreCertNeeded = true;
                 result.howManyMoreOfEachCertNeeded.Add(count);
                 total += count;
             }
@@ -276,6 +278,7 @@ namespace CMS
             for(int i = 0; i < result.reqForTheJob.Count; i++)
             {
                 result.costToAddForEachCert.Add(((listOfCost[certIndex[i]] / 1920.0) * hoursPredictedToCompleteJob) * result.reqForTheJob[i].Count);
+                result.totalCostForCert += ((listOfCost[certIndex[i]] / 1920.0) * hoursPredictedToCompleteJob) * result.reqForTheJob[i].Count;
             }
         }
 

@@ -105,6 +105,7 @@ namespace CMS
                 mainGridView.Width = mainGridView.Width + menu_job_size;
                 jobMenu.Width = 0;
                 menu_job_show = !menu_job_show;
+                resetVisibility();
             }
         }
 
@@ -829,27 +830,43 @@ namespace CMS
             int daysRequested = 0;
 
             listBoxMissingCert.Items.Clear();
+            resetVisibility();
 
             if (textBox2.Text != "" && textBox3.Text != "")
             {
-                if (int.TryParse(textBox2.Text, out hoursForWork) && int.TryParse(textBox3.Text, out daysRequested))
+                hoursForWork = int.Parse(textBox2.Text);
+                daysRequested = int.Parse(textBox3.Text);
+
+                mBase.clearEmployeeList();
+                result = mBase.CheckJobReqWithEmployees(reqCert, hoursForWork, daysRequested);
+
+                for (int i = 0; i < mainGridView.Rows.Count; i++)
                 {
-                    hoursForWork = int.Parse(textBox2.Text);
-                    daysRequested = int.Parse(textBox3.Text);
-
-                    mBase.clearEmployeeList();
-                    result = mBase.CheckJobReqWithEmployees(reqCert, hoursForWork, daysRequested);
-
-                    int totalCost = 0;
-                    foreach (int item in result.costToTrainMorePeople)
+                    bool show = false;
+                    for (int j = 0; j < result.listOfAvailableEmpoyees.Count; j++)
                     {
-                        totalCost += item;
+                        if (mainGridView.Rows[i].Cells["Id"].Value.ToString() == result.listOfAvailableEmpoyees[j].id.ToString())
+                        {
+                            show = true;
+                            break;
+                        }
                     }
+                    if (!show)
+                        mainGridView.Rows[i].Visible = false;
+                }
 
-                    labelCost.Text = totalCost.ToString() + " kr ";
-                    
-                    varning1.Visible = !result.canCompleteInReqDays;
-                    PanelMissingCertMain.Visible = result.howManyMoreOfEachCertNeeded.Count >= 0;
+                int totalCost = 0;
+                foreach (int item in result.costToTrainMorePeople)
+                {
+                    totalCost += item;
+                }
+
+                labelCost.Text = totalCost.ToString() + " kr ";
+
+                varning1.Visible = !result.canCompleteInReqDays;
+                if (result.moreCertNeeded)
+                {
+                    PanelMissingCertMain.Visible = true;
 
                     for (int i = 0; i < result.howManyMoreOfEachCertNeeded.Count; i++)
                     {
@@ -859,11 +876,8 @@ namespace CMS
                         }
                     }
                 }
-                else
-                {
-                    MessageBox.Show("The boxes (Hours job will take) and (Days to finish job requested) can only take numbers!");
-                }
 
+                totalCertCostLabel.Text = result.totalCostForCert.ToString() + " kr ";
             }
             else
             {
@@ -877,6 +891,32 @@ namespace CMS
             (e.KeyChar != '.'))
             {
                 e.Handled = true;
+            }
+        }
+
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+            (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+            (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void resetVisibility()
+        {
+            for (int i = 0; i < mainGridView.Rows.Count; i++)
+            {
+                mainGridView.Rows[i].Visible = true;
             }
         }
     }
