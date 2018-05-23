@@ -824,12 +824,31 @@ namespace CMS
 
         private void button3_Click(object sender, EventArgs e)
         {
-            int hoursForWork = int.Parse(textBox2.Text);
-            int daysRequested = int.Parse(textBox3.Text);
-            result = mBase.CheckJobReqWithEmployees(reqCert, hoursForWork, daysRequested);
-            mBase.clearEmployeeList();
+            int hoursForWork = 0;
+            int daysRequested = 0;
 
-            varning1.Visible = !result.canCompleteInReqDays;
+            if (textBox2.Text != "" && textBox3.Text != "")
+            {
+                if (int.TryParse(textBox2.Text, out hoursForWork) && int.TryParse(textBox3.Text, out daysRequested))
+                {
+                    hoursForWork = int.Parse(textBox2.Text);
+                    daysRequested = int.Parse(textBox3.Text);
+
+                    mBase.clearEmployeeList();
+                    result = mBase.CheckJobReqWithEmployees(reqCert, hoursForWork, daysRequested);
+
+                    varning1.Visible = !result.canCompleteInReqDays;
+                }
+                else
+                {
+                    MessageBox.Show("The boxes (Hours job will take) and (Days to finish job requested) can only take numbers!");
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("The boxes (Hours job will take) and (Days to finish job requested) needs to be filled in!");
+            }
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)

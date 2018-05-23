@@ -220,7 +220,7 @@ namespace CMS
                 }
                 else
                 {
-                    result.timeNeeded += result.reqForTheJob[i].Count * 8 * reqDaysToFinishJob;
+                    result.timeNeeded += result.howManyOfEachCertExists[i] * 8 * reqDaysToFinishJob;
                 }
             } 
 
@@ -301,7 +301,6 @@ namespace CMS
             employees.ClearList();
             result.ClearList();
             nrOfDiffCert = 0;
-            int dsd = 0;
         }
     }
 }

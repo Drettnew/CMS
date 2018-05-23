@@ -48,8 +48,7 @@ namespace CMS.SelfCreatedLists
 
         public void ClearList()
         {
-            reqForTheJob.Clear();
-            //namesWithCert.Clear();
+            //reqForTheJob.Clear();;
             listOfAvailableEmpoyees.Clear();
             howManyOfEachCertExists.Clear();
             howManyMoreOfEachCertNeeded.Clear();
