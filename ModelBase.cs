@@ -222,7 +222,7 @@ namespace CMS
                 {
                     result.timeNeeded += result.reqForTheJob[i].Count * 8 * reqDaysToFinishJob;
                 }
-            } 
+            }
 
             //Checks if the job can be completed in the req days
             if (result.timeNeeded >= hoursPredictedToCompleteJob)
@@ -299,7 +299,7 @@ namespace CMS
         public void clearEmployeeList()
         {
             employees.ClearList();
-            result.ClearList();
+            //result.ClearList();
             nrOfDiffCert = 0;
             int dsd = 0;
         }

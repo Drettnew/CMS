@@ -94,6 +94,7 @@ namespace CMS
                 reqCert = new List<JobCertReqList>();
                 textBox1.Text = "1";
                 varning1.Visible = false;
+                PanelMissingCertMain.Visible = false;
 
                 mainGridView.Width = mainGridView.Width - menu_job_size;
                 jobMenu.Width = menu_job_size;
@@ -803,9 +804,9 @@ namespace CMS
 
                     reqCert.Add(cert);
 
-                    listBox1.Items.Add(new KeyValuePair<string, string>(cert.Certificate, cert.Certificate + " : " + cert.Count));
-                    listBox1.ValueMember = "Key";
-                    listBox1.DisplayMember = "Value";
+                    listBoxReqCert.Items.Add(new KeyValuePair<string, string>(cert.Certificate, cert.Certificate + " : " + cert.Count));
+                    listBoxReqCert.ValueMember = "Key";
+                    listBoxReqCert.DisplayMember = "Value";
 
                     textBox1.Text = "1";
                 }
@@ -814,22 +815,35 @@ namespace CMS
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (listBox1.SelectedIndex >= 0 && menu_job_show)
+            if (listBoxReqCert.SelectedIndex >= 0 && menu_job_show)
             {
-                reqCert.RemoveAt(listBox1.SelectedIndex);
-                listBox1.Items.RemoveAt(listBox1.SelectedIndex);
+                reqCert.RemoveAt(listBoxReqCert.SelectedIndex);
+                listBoxReqCert.Items.RemoveAt(listBoxReqCert.SelectedIndex);
                 
             }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            mBase.clearEmployeeList();
+            listBoxMissingCert.Items.Clear();
+
             int hoursForWork = int.Parse(textBox2.Text);
             int daysRequested = int.Parse(textBox3.Text);
             result = mBase.CheckJobReqWithEmployees(reqCert, hoursForWork, daysRequested);
-            mBase.clearEmployeeList();
+
+            labelCost.Text = result.costToTrainMorePeople.ToString();
 
             varning1.Visible = !result.canCompleteInReqDays;
+            PanelMissingCertMain.Visible = result.howManyMoreOfEachCertNeeded.Count >= 0;
+
+            for (int i = 0; i < result.howManyMoreOfEachCertNeeded.Count; i++)
+            {
+                if (result.howManyMoreOfEachCertNeeded[i] > 0)
+                {
+                    listBoxMissingCert.Items.Add(result.reqForTheJob[i].Certificate + " : " + result.howManyMoreOfEachCertNeeded[i]);
+                }
+            }
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
