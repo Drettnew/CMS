@@ -825,28 +825,10 @@ namespace CMS
 
         private void button3_Click(object sender, EventArgs e)
         {
-<<<<<<< HEAD
-            mBase.clearEmployeeList();
-            listBoxMissingCert.Items.Clear();
-
-            int hoursForWork = int.Parse(textBox2.Text);
-            int daysRequested = int.Parse(textBox3.Text);
-            result = mBase.CheckJobReqWithEmployees(reqCert, hoursForWork, daysRequested);
-
-            labelCost.Text = result.costToTrainMorePeople.ToString();
-
-            varning1.Visible = !result.canCompleteInReqDays;
-            PanelMissingCertMain.Visible = result.howManyMoreOfEachCertNeeded.Count >= 0;
-
-            for (int i = 0; i < result.howManyMoreOfEachCertNeeded.Count; i++)
-            {
-                if (result.howManyMoreOfEachCertNeeded[i] > 0)
-                {
-                    listBoxMissingCert.Items.Add(result.reqForTheJob[i].Certificate + " : " + result.howManyMoreOfEachCertNeeded[i]);
-                }
-=======
             int hoursForWork = 0;
             int daysRequested = 0;
+
+            listBoxMissingCert.Items.Clear();
 
             if (textBox2.Text != "" && textBox3.Text != "")
             {
@@ -858,7 +840,24 @@ namespace CMS
                     mBase.clearEmployeeList();
                     result = mBase.CheckJobReqWithEmployees(reqCert, hoursForWork, daysRequested);
 
+                    int totalCost = 0;
+                    foreach (int item in result.costToTrainMorePeople)
+                    {
+                        totalCost += item;
+                    }
+
+                    labelCost.Text = totalCost.ToString() + " kr ";
+                    
                     varning1.Visible = !result.canCompleteInReqDays;
+                    PanelMissingCertMain.Visible = result.howManyMoreOfEachCertNeeded.Count >= 0;
+
+                    for (int i = 0; i < result.howManyMoreOfEachCertNeeded.Count; i++)
+                    {
+                        if (result.howManyMoreOfEachCertNeeded[i] > 0)
+                        {
+                            listBoxMissingCert.Items.Add(result.reqForTheJob[i].Certificate + " : " + result.howManyMoreOfEachCertNeeded[i] + " ( " + result.costToTrainMorePeople[i] + " kr ) ");
+                        }
+                    }
                 }
                 else
                 {
@@ -869,7 +868,6 @@ namespace CMS
             else
             {
                 MessageBox.Show("The boxes (Hours job will take) and (Days to finish job requested) needs to be filled in!");
->>>>>>> cde49c08c935f0a018fd8af6c97b9d7047a51099
             }
         }
 
