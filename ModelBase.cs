@@ -206,7 +206,7 @@ namespace CMS
             else
                 result.canCompleteInReqDays = false;
 
-            calcCertNeeded(certIndex);
+            calcCertNeeded(certIndex, hoursPredictedToCompleteJob);
 
         }
 
@@ -215,7 +215,7 @@ namespace CMS
         /// Just calculates the number of employees with right cert we have in 
         /// total and per certificate.
         /// </summary>
-        private void calcCertNeeded(List<int> certIndex)
+        private void calcCertNeeded(List<int> certIndex, int hoursPredictedToCompleteJob)
         {
             int count = 0;
             int total = 0;
@@ -229,11 +229,11 @@ namespace CMS
                 total += count;
             }
 
-           needToTrainMorePeople(total, certIndex);
+           needToTrainMorePeople(total, certIndex, hoursPredictedToCompleteJob);
         } 
 
 
-        private void needToTrainMorePeople(int nrOfPeopleNeeded, List<int> certIndex)
+        private void needToTrainMorePeople(int nrOfPeopleNeeded, List<int> certIndex, int hoursPredictedToCompleteJob)
         {
             List<int> listOfCost = new List<int>();
             String tmp = "";
@@ -266,15 +266,15 @@ namespace CMS
 
             }
 
-            costToAddOnPrice(listOfCost, certIndex);
+            costToAddOnPrice(listOfCost, certIndex, hoursPredictedToCompleteJob);
         }
 
 
-        private void costToAddOnPrice(List<int> listOfCost, List<int> certIndex)
+        private void costToAddOnPrice(List<int> listOfCost, List<int> certIndex, int hoursPredictedToCompleteJob)
         {
             for(int i = 0; i < result.reqForTheJob.Count; i++)
             {
-                result.costToAddForEachCert.Add((listOfCost[certIndex[i]] / 1920.0) * result.reqForTheJob[i].Count);
+                result.costToAddForEachCert.Add((listOfCost[certIndex[i]] / 1920.0) * hoursPredictedToCompleteJob);
             }
         }
 
