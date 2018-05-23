@@ -825,6 +825,7 @@ namespace CMS
 
         private void button3_Click(object sender, EventArgs e)
         {
+<<<<<<< HEAD
             mBase.clearEmployeeList();
             listBoxMissingCert.Items.Clear();
 
@@ -843,6 +844,32 @@ namespace CMS
                 {
                     listBoxMissingCert.Items.Add(result.reqForTheJob[i].Certificate + " : " + result.howManyMoreOfEachCertNeeded[i]);
                 }
+=======
+            int hoursForWork = 0;
+            int daysRequested = 0;
+
+            if (textBox2.Text != "" && textBox3.Text != "")
+            {
+                if (int.TryParse(textBox2.Text, out hoursForWork) && int.TryParse(textBox3.Text, out daysRequested))
+                {
+                    hoursForWork = int.Parse(textBox2.Text);
+                    daysRequested = int.Parse(textBox3.Text);
+
+                    mBase.clearEmployeeList();
+                    result = mBase.CheckJobReqWithEmployees(reqCert, hoursForWork, daysRequested);
+
+                    varning1.Visible = !result.canCompleteInReqDays;
+                }
+                else
+                {
+                    MessageBox.Show("The boxes (Hours job will take) and (Days to finish job requested) can only take numbers!");
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("The boxes (Hours job will take) and (Days to finish job requested) needs to be filled in!");
+>>>>>>> cde49c08c935f0a018fd8af6c97b9d7047a51099
             }
         }
 

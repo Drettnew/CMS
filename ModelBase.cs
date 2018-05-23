@@ -57,14 +57,15 @@ namespace CMS
                 }
             }
 
-            bool newEmployeeFound = true;
+            bool newEmployeeFound = true; 
+            bool employeeCounted = false;
             String name = "";
             int id = -1;
             List<String> lCert = new List<String>();
-            //ChoosenEmployee rightCer = new ChoosenEmployee();
             for (int i = 1; i < employees.names.Count + 1; i++)
             {
                 newEmployeeFound = true;
+                employeeCounted = false;
 
                 for (int j = 0; j < certIndex.Count; j++)
                 {
@@ -79,44 +80,26 @@ namespace CMS
 
                         result.howManyOfEachCertExists[j] += 1;
                         lCert.Add(employees.cert[0][certIndex[j]]);
+
+                        if (result.howManyOfEachCertExists[j] <= result.reqForTheJob[j].Count && !employeeCounted)
+                        {
+                            result.nrOfActualPeopleFound++;
+                            employeeCounted = true;
+                        }
                     }
                 }
 
                 List<String> newList = new List<String>(lCert);
 
-                if(!newEmployeeFound)
-                    result.listOfAvailableEmpoyees.Add(new ChoosenEmployee(name, id, newList));
+                if (!newEmployeeFound)
+                {
+                    result.listOfAvailableEmpoyees.Add(new ChoosenEmployee(name, id, newList)); 
+                        
+                }
                 name = "";
                 id = -1;
                 lCert.Clear();
-            }
-
-            //int nrOfCertFound = 0;
-            //
-            //for (int i = 1; i < employees.names.Count + 1; i++)
-            //{
-            //    //Skip the "count" variable all together
-            //    //Instead remove the item finished from certIndex. So if all people needed for index 1
-            //    //in certIndex has been found then remove it from certIndex.
-            //    for (int j = 0; j < certIndex.Count; j++) 
-            //    {
-            //        if(employees.cert[i][certIndex[j]] == "1")
-            //        {
-            //            result.namesWithCert.Add(employees.names[i - 1]);
-            //            result.howManyOfEachCertExists[j] += 1;
-            //            
-            //            nrOfCertFound++;
-            //
-            //            if (certForJob[j].Count == nrOfCertFound)
-            //            {
-            //                certIndex.RemoveAt(j);
-            //                nrOfCertFound = 0;
-            //            }
-            //
-            //            j = certIndex.Count;
-            //        }
-            //    }
-            //}
+            }  
 
             calcTotalWorksHoursAvailable(hoursPredictedToCompleteJob, reqDaysToFinishJob, copyOfCertIndex);
 
@@ -210,19 +193,13 @@ namespace CMS
         /// <param name="reqDaysToFinishJob"></param>
         private void calcTotalWorksHoursAvailable(int hoursPredictedToCompleteJob, int reqDaysToFinishJob, List<int> certIndex)
         {
-            int certCount = 0;
             for (int i = 0; i < result.howManyOfEachCertExists.Count; i++)
             {
-                if (result.howManyOfEachCertExists[i] > result.reqForTheJob[i].Count)
-                {
-                    certCount = result.reqForTheJob[i].Count;
-                    result.timeNeeded += certCount * 8 * reqDaysToFinishJob;
-                }
+                if (result.nrOfActualPeopleFound > 0)
+                    result.timeNeeded = result.nrOfActualPeopleFound * 8 * reqDaysToFinishJob;
                 else
-                {
-                    result.timeNeeded += result.reqForTheJob[i].Count * 8 * reqDaysToFinishJob;
-                }
-            }
+                    result.timeNeeded = 0;
+            } 
 
             //Checks if the job can be completed in the req days
             if (result.timeNeeded >= hoursPredictedToCompleteJob)
@@ -261,7 +238,6 @@ namespace CMS
         {
             List<int> listOfCost = new List<int>();
             String tmp = "";
-            int totalCost = 0;
 
             if(nrOfPeopleNeeded > 0)
             {
@@ -281,15 +257,15 @@ namespace CMS
                 con.Close();
                 for(int i = 0; i < result.howManyMoreOfEachCertNeeded.Count; i++)
                 {
-                    if(result.howManyMoreOfEachCertNeeded[i] > 0)
+                    if (result.howManyMoreOfEachCertNeeded[i] > 0)
                     {
-                        totalCost += listOfCost[certIndex[i]] * result.howManyMoreOfEachCertNeeded[i];
+                        result.costToTrainMorePeople.Add(listOfCost[certIndex[i]] * result.howManyMoreOfEachCertNeeded[i]);
                     }
+                    else
+                        result.costToTrainMorePeople.Add(0);
                 }
 
             }
-
-            result.costToTrainMorePeople = totalCost;
         }
 
 
@@ -299,9 +275,8 @@ namespace CMS
         public void clearEmployeeList()
         {
             employees.ClearList();
-            //result.ClearList();
+            result.ClearList();
             nrOfDiffCert = 0;
-            int dsd = 0;
         }
     }
 }

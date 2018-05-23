@@ -31,31 +31,30 @@ namespace CMS.SelfCreatedLists
     public class ListOfOutPutsFromModelBase
     {
         public List<JobCertReqList> reqForTheJob;
-        //public List<String> namesWithCert = new List<String>();
         public List<ChoosenEmployee> listOfAvailableEmpoyees = new List<ChoosenEmployee>();
         public List<int> howManyOfEachCertExists = new List<int>();
         public List<int> howManyMoreOfEachCertNeeded = new List<int>();
+        public List<int> costToTrainMorePeople = new List<int>();
         public bool canCompleteInReqDays;
         public int timeNeeded;
-        public int costToTrainMorePeople;
+        public int nrOfActualPeopleFound;
 
         public ListOfOutPutsFromModelBase()
         {
             timeNeeded = 0;
-            costToTrainMorePeople = 0;
             canCompleteInReqDays = false;
+            nrOfActualPeopleFound = 0;
         }
 
         public void ClearList()
         {
-            reqForTheJob.Clear();
-            //namesWithCert.Clear();
             listOfAvailableEmpoyees.Clear();
             howManyOfEachCertExists.Clear();
             howManyMoreOfEachCertNeeded.Clear();
+            costToTrainMorePeople.Clear();
             timeNeeded = 0;
-            costToTrainMorePeople = 0;
             canCompleteInReqDays = false;
+            nrOfActualPeopleFound = 0;
         }
     }
 }
