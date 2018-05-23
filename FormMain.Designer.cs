@@ -76,6 +76,10 @@
             this.buttonCertNew = new System.Windows.Forms.Button();
             this.comboBoxCerts = new System.Windows.Forms.ComboBox();
             this.buttonCerts = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label9 = new System.Windows.Forms.Label();
+            this.listBox2 = new System.Windows.Forms.ListBox();
+            this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.mainGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.certificationsDatabaseDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.certificationsDatabaseDataSet)).BeginInit();
@@ -83,6 +87,7 @@
             this.panelEmployees.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.certificationsBindingSource)).BeginInit();
             this.certMenu.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainGridView
@@ -143,6 +148,9 @@
             // 
             this.jobMenu.BackColor = System.Drawing.SystemColors.ControlLight;
             this.jobMenu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.jobMenu.Controls.Add(this.label10);
+            this.jobMenu.Controls.Add(this.listBox2);
+            this.jobMenu.Controls.Add(this.panel1);
             this.jobMenu.Controls.Add(this.listBox1);
             this.jobMenu.Controls.Add(this.label8);
             this.jobMenu.Controls.Add(this.label7);
@@ -155,15 +163,16 @@
             this.jobMenu.Controls.Add(this.button1);
             this.jobMenu.Controls.Add(this.textBox1);
             this.jobMenu.Controls.Add(this.comboBox1);
-            this.jobMenu.Location = new System.Drawing.Point(721, 45);
+            this.jobMenu.Location = new System.Drawing.Point(625, 45);
             this.jobMenu.Name = "jobMenu";
-            this.jobMenu.Size = new System.Drawing.Size(250, 500);
+            this.jobMenu.Size = new System.Drawing.Size(346, 500);
             this.jobMenu.TabIndex = 3;
             // 
             // listBox1
             // 
+            this.listBox1.BackColor = System.Drawing.SystemColors.Window;
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(13, 43);
+            this.listBox1.Location = new System.Drawing.Point(118, 32);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(120, 121);
             this.listBox1.TabIndex = 12;
@@ -171,16 +180,16 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(13, 254);
+            this.label8.Location = new System.Drawing.Point(10, 83);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(137, 13);
+            this.label8.Size = new System.Drawing.Size(87, 13);
             this.label8.TabIndex = 11;
-            this.label8.Text = "Days to finish job requested";
+            this.label8.Text = "Days to finish job";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(13, 203);
+            this.label7.Location = new System.Drawing.Point(10, 32);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(93, 13);
             this.label7.TabIndex = 10;
@@ -189,7 +198,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(146, 155);
+            this.label6.Location = new System.Drawing.Point(251, 144);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(90, 13);
             this.label6.TabIndex = 9;
@@ -198,7 +207,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(10, 16);
+            this.label5.Location = new System.Drawing.Point(115, 5);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(139, 13);
             this.label5.TabIndex = 8;
@@ -206,9 +215,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(145, 270);
+            this.button3.Location = new System.Drawing.Point(10, 161);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(87, 23);
+            this.button3.Size = new System.Drawing.Size(93, 23);
             this.button3.TabIndex = 7;
             this.button3.Text = "Calculate job";
             this.button3.UseVisualStyleBackColor = true;
@@ -216,21 +225,21 @@
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(13, 270);
+            this.textBox3.Location = new System.Drawing.Point(10, 114);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
+            this.textBox3.Size = new System.Drawing.Size(93, 20);
             this.textBox3.TabIndex = 6;
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(13, 220);
+            this.textBox2.Location = new System.Drawing.Point(10, 49);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
+            this.textBox2.Size = new System.Drawing.Size(93, 20);
             this.textBox2.TabIndex = 5;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(145, 72);
+            this.button2.Location = new System.Drawing.Point(250, 61);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 4;
@@ -240,7 +249,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(145, 43);
+            this.button1.Location = new System.Drawing.Point(250, 32);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 3;
@@ -250,7 +259,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(145, 175);
+            this.textBox1.Location = new System.Drawing.Point(250, 164);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(55, 20);
             this.textBox1.TabIndex = 2;
@@ -259,7 +268,7 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(13, 174);
+            this.comboBox1.Location = new System.Drawing.Point(118, 163);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 0;
@@ -534,6 +543,43 @@
             this.buttonCerts.UseVisualStyleBackColor = true;
             this.buttonCerts.Click += new System.EventHandler(this.buttonCerts_Click);
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.Red;
+            this.panel1.Controls.Add(this.label9);
+            this.panel1.Location = new System.Drawing.Point(10, 210);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(277, 33);
+            this.panel1.TabIndex = 13;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(3, 10);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(274, 13);
+            this.label9.TabIndex = 0;
+            this.label9.Text = "There are not enough employees to finish the job on time";
+            // 
+            // listBox2
+            // 
+            this.listBox2.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.listBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.listBox2.FormattingEnabled = true;
+            this.listBox2.Location = new System.Drawing.Point(10, 296);
+            this.listBox2.Name = "listBox2";
+            this.listBox2.Size = new System.Drawing.Size(93, 197);
+            this.listBox2.TabIndex = 14;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(10, 278);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(64, 13);
+            this.label10.TabIndex = 15;
+            this.label10.Text = "Missing Cert";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -561,6 +607,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.certificationsBindingSource)).EndInit();
             this.certMenu.ResumeLayout(false);
             this.certMenu.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -613,6 +661,10 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ListBox listBox2;
     }
 }
 
