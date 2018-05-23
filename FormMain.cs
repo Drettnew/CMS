@@ -37,7 +37,7 @@ namespace CMS
         public FormMain()
         {
             InitializeComponent();
-            test34();
+            //test34();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -93,6 +93,8 @@ namespace CMS
             {
                 reqCert = new List<JobCertReqList>();
                 textBox1.Text = "1";
+                varning1.Visible = false;
+
                 mainGridView.Width = mainGridView.Width - menu_job_size;
                 jobMenu.Width = menu_job_size;
                 menu_job_show = !menu_job_show;
@@ -824,7 +826,10 @@ namespace CMS
         {
             int hoursForWork = int.Parse(textBox2.Text);
             int daysRequested = int.Parse(textBox3.Text);
-            //reqCert for Certs required
+            result = mBase.CheckJobReqWithEmployees(reqCert, hoursForWork, daysRequested);
+            mBase.clearEmployeeList();
+
+            varning1.Visible = !result.canCompleteInReqDays;
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)

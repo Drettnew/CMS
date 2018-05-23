@@ -278,7 +278,7 @@ namespace CMS
                     listOfCost.Add(x);
                 }
                 dr.Close();
-
+                con.Close();
                 for(int i = 0; i < result.howManyMoreOfEachCertNeeded.Count; i++)
                 {
                     if(result.howManyMoreOfEachCertNeeded[i] > 0)
