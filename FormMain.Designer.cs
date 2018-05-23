@@ -36,11 +36,15 @@
             this.certificationsDatabaseDataSet = new CMS.CertificationsDatabaseDataSet();
             this.menuButton = new System.Windows.Forms.Button();
             this.jobMenu = new System.Windows.Forms.Panel();
+            this.PanelMissingCertMain = new System.Windows.Forms.Panel();
+            this.labelCost = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.listBox2 = new System.Windows.Forms.ListBox();
+            this.listBoxMissingCert = new System.Windows.Forms.ListBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label11 = new System.Windows.Forms.Label();
             this.varning1 = new System.Windows.Forms.Panel();
             this.label9 = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.listBoxReqCert = new System.Windows.Forms.ListBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -84,6 +88,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.certificationsDatabaseDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.certificationsDatabaseDataSet)).BeginInit();
             this.jobMenu.SuspendLayout();
+            this.PanelMissingCertMain.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.varning1.SuspendLayout();
             this.panelEmployees.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.certificationsBindingSource)).BeginInit();
@@ -148,10 +154,9 @@
             // 
             this.jobMenu.BackColor = System.Drawing.SystemColors.ControlLight;
             this.jobMenu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.jobMenu.Controls.Add(this.label10);
-            this.jobMenu.Controls.Add(this.listBox2);
+            this.jobMenu.Controls.Add(this.PanelMissingCertMain);
             this.jobMenu.Controls.Add(this.varning1);
-            this.jobMenu.Controls.Add(this.listBox1);
+            this.jobMenu.Controls.Add(this.listBoxReqCert);
             this.jobMenu.Controls.Add(this.label8);
             this.jobMenu.Controls.Add(this.label7);
             this.jobMenu.Controls.Add(this.label6);
@@ -168,51 +173,91 @@
             this.jobMenu.Size = new System.Drawing.Size(346, 500);
             this.jobMenu.TabIndex = 3;
             // 
+            // PanelMissingCertMain
+            // 
+            this.PanelMissingCertMain.Controls.Add(this.labelCost);
+            this.PanelMissingCertMain.Controls.Add(this.label10);
+            this.PanelMissingCertMain.Controls.Add(this.listBoxMissingCert);
+            this.PanelMissingCertMain.Controls.Add(this.panel1);
+            this.PanelMissingCertMain.Location = new System.Drawing.Point(10, 285);
+            this.PanelMissingCertMain.Name = "PanelMissingCertMain";
+            this.PanelMissingCertMain.Size = new System.Drawing.Size(331, 210);
+            this.PanelMissingCertMain.TabIndex = 16;
+            // 
+            // labelCost
+            // 
+            this.labelCost.AutoSize = true;
+            this.labelCost.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.labelCost.Location = new System.Drawing.Point(225, 22);
+            this.labelCost.MinimumSize = new System.Drawing.Size(90, 2);
+            this.labelCost.Name = "labelCost";
+            this.labelCost.Size = new System.Drawing.Size(90, 15);
+            this.labelCost.TabIndex = 16;
+            this.labelCost.Text = "label13";
+            // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(10, 278);
+            this.label10.Location = new System.Drawing.Point(222, 9);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(64, 13);
+            this.label10.Size = new System.Drawing.Size(90, 13);
             this.label10.TabIndex = 15;
-            this.label10.Text = "Missing Cert";
+            this.label10.Text = "Total Cost to train";
             // 
-            // listBox2
+            // listBoxMissingCert
             // 
-            this.listBox2.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.listBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.Location = new System.Drawing.Point(10, 296);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(93, 197);
-            this.listBox2.TabIndex = 14;
+            this.listBoxMissingCert.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.listBoxMissingCert.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.listBoxMissingCert.FormattingEnabled = true;
+            this.listBoxMissingCert.Location = new System.Drawing.Point(3, 22);
+            this.listBoxMissingCert.Name = "listBoxMissingCert";
+            this.listBoxMissingCert.Size = new System.Drawing.Size(213, 184);
+            this.listBoxMissingCert.TabIndex = 14;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.Red;
+            this.panel1.Controls.Add(this.label11);
+            this.panel1.Location = new System.Drawing.Point(35, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(142, 19);
+            this.panel1.TabIndex = 14;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(20, 3);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(105, 13);
+            this.label11.TabIndex = 0;
+            this.label11.Text = "Missing Certifications";
             // 
             // varning1
             // 
             this.varning1.BackColor = System.Drawing.Color.Red;
             this.varning1.Controls.Add(this.label9);
-            this.varning1.Location = new System.Drawing.Point(10, 210);
+            this.varning1.Location = new System.Drawing.Point(10, 194);
             this.varning1.Name = "varning1";
-            this.varning1.Size = new System.Drawing.Size(277, 33);
+            this.varning1.Size = new System.Drawing.Size(277, 19);
             this.varning1.TabIndex = 13;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(3, 10);
+            this.label9.Location = new System.Drawing.Point(1, 2);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(274, 13);
             this.label9.TabIndex = 0;
             this.label9.Text = "There are not enough employees to finish the job on time";
             // 
-            // listBox1
+            // listBoxReqCert
             // 
-            this.listBox1.BackColor = System.Drawing.SystemColors.Window;
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(118, 32);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(120, 121);
-            this.listBox1.TabIndex = 12;
+            this.listBoxReqCert.BackColor = System.Drawing.SystemColors.Window;
+            this.listBoxReqCert.FormattingEnabled = true;
+            this.listBoxReqCert.Location = new System.Drawing.Point(118, 32);
+            this.listBoxReqCert.Name = "listBoxReqCert";
+            this.listBoxReqCert.Size = new System.Drawing.Size(120, 121);
+            this.listBoxReqCert.TabIndex = 12;
             // 
             // label8
             // 
@@ -262,7 +307,7 @@
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(10, 114);
+            this.textBox3.Location = new System.Drawing.Point(10, 99);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(93, 20);
             this.textBox3.TabIndex = 6;
@@ -602,6 +647,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.certificationsDatabaseDataSet)).EndInit();
             this.jobMenu.ResumeLayout(false);
             this.jobMenu.PerformLayout();
+            this.PanelMissingCertMain.ResumeLayout(false);
+            this.PanelMissingCertMain.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.varning1.ResumeLayout(false);
             this.varning1.PerformLayout();
             this.panelEmployees.ResumeLayout(false);
@@ -660,11 +709,15 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox listBoxReqCert;
         private System.Windows.Forms.Panel varning1;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Panel PanelMissingCertMain;
+        private System.Windows.Forms.ListBox listBoxMissingCert;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label labelCost;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.ListBox listBox2;
     }
 }
 
