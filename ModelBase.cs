@@ -206,7 +206,7 @@ namespace CMS
                 double tmp = hoursPredictedToCompleteJob / (8.0 * reqDaysToFinishJob);
                 int tmp1 = (int)Math.Ceiling(tmp);
                 int tmp2 = tmp1 - result.nrOfActualPeopleFound;
-                result.pplNeededToFinishInTime = tmp2;
+                result.nrOfExtraPeopleNeeded = tmp2;
             }
 
             calcCertNeeded(certIndex, hoursPredictedToCompleteJob);
