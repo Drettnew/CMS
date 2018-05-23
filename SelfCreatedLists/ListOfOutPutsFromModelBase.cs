@@ -36,6 +36,7 @@ namespace CMS.SelfCreatedLists
         public List<int> howManyMoreOfEachCertNeeded = new List<int>();
         public List<int> costToTrainMorePeople = new List<int>();
         public bool canCompleteInReqDays;
+        public bool moreCertNeeded;
         public int timeNeeded;
         public int nrOfActualPeopleFound;
 
@@ -43,6 +44,7 @@ namespace CMS.SelfCreatedLists
         {
             timeNeeded = 0;
             canCompleteInReqDays = false;
+            moreCertNeeded = false;
             nrOfActualPeopleFound = 0;
         }
 
@@ -54,6 +56,7 @@ namespace CMS.SelfCreatedLists
             costToTrainMorePeople.Clear();
             timeNeeded = 0;
             canCompleteInReqDays = false;
+            moreCertNeeded = false;
             nrOfActualPeopleFound = 0;
         }
     }

@@ -226,6 +226,8 @@ namespace CMS
                 count = result.reqForTheJob[i].Count - result.howManyOfEachCertExists[i];
                 if (count < 0)
                     count = 0;
+                if (count > 0)
+                    result.moreCertNeeded = true;
                 result.howManyMoreOfEachCertNeeded.Add(count);
                 total += count;
             }
