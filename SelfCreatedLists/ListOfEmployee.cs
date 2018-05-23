@@ -10,18 +10,20 @@ namespace CMS.SelfCreatedLists
     /// Lists of alla the employees and their certs.
     /// Names are in a single list and cert in a matrix
     /// </summary>
-    class ListOfEmployees
+    class ListOfEmployee
     {
         public List<String> names = new List<String>();
+        public List<int> ids = new List<int>();
         public List<List<String>> cert = new List<List<String>>();
 
-        public ListOfEmployees()
+        public ListOfEmployee()
         {
         }
 
         public void ClearList()
         {
             names.Clear();
+            ids.Clear();
             cert.Clear();
         }
     }

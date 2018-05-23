@@ -31,15 +31,40 @@ namespace CMS
 
         EmployeeChanges employee = new EmployeeChanges();
         List<JobCertReqList> reqCert;
+        ModelBase mBase = new ModelBase();
+        ListOfOutPutsFromModelBase result = new ListOfOutPutsFromModelBase();
 
         public FormMain()
         {
             InitializeComponent();
+            test34();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void test34()
+        {
+            JobCertReqList t1 = new JobCertReqList();
+            JobCertReqList t2 = new JobCertReqList();
+            JobCertReqList t3 = new JobCertReqList();
+            t1.Certificate = "EON";
+            t1.Count = 2;
+            t2.Certificate = "Atlas Copco";
+            t2.Count = 2;
+            t3.Certificate = "SSG utbild";
+            t3.Count = 2;
+
+            List<JobCertReqList> certForJob = new List<JobCertReqList>();
+            certForJob.Add(t1);
+            certForJob.Add(t2);
+            certForJob.Add(t3);
+
+            result = mBase.CheckJobReqWithEmployees(certForJob, 150, 25);
+            mBase.clearEmployeeList();
+
         }
 
         private void FormMain_Load(object sender, EventArgs e)

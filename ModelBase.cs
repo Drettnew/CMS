@@ -17,7 +17,7 @@ namespace CMS
         private SqlDataReader dr;
 
         private int nrOfDiffCert;  //Holds the number of different cert the job requests.
-        ListOfEmployees employees = new ListOfEmployees();
+        ListOfEmployee employees = new ListOfEmployee();
         ListOfOutPutsFromModelBase result = new ListOfOutPutsFromModelBase();
 
 
@@ -25,6 +25,7 @@ namespace CMS
         {
             nrOfDiffCert = 0;
         }
+
 
         /// <summary>
         /// Checks and saves how many of each employees with right cert we have.
@@ -34,9 +35,11 @@ namespace CMS
         /// <param name="hoursToCompleteJob"></param> Hours it should take to complete job
         /// <param name="reqDaysToFinishJob"></param> Number of days we have available.
         /// <returns></returns>
-        public String CheckJobReqWithEmployees(List<JobCertReqList> certForJob, int hoursToCompleteJob, int reqDaysToFinishJob)
+        public ListOfOutPutsFromModelBase CheckJobReqWithEmployees(List<JobCertReqList> certForJob, int hoursPredictedToCompleteJob, int reqDaysToFinishJob)
         {
             List<int> certIndex = new List<int>();
+            List<int> copyOfCertIndex = new List<int>();
+            result.reqForTheJob = certForJob;
 
             GetListOfEmployessFromDataBase();
 
@@ -47,76 +50,79 @@ namespace CMS
                     if (certForJob[i].Certificate == employees.cert[0][j])
                     {
                         certIndex.Add(j);
+                        copyOfCertIndex.Add(j);
                         result.howManyOfEachCertExists.Add(0);
                         j = nrOfDiffCert;
                     }
                 }
             }
-            
 
-            for (int i = 0; i < employees.names.Count; i++)
+            bool newEmployeeFound = true;
+            String name = "";
+            int id = -1;
+            List<String> lCert = new List<String>();
+            //ChoosenEmployee rightCer = new ChoosenEmployee();
+            for (int i = 1; i < employees.names.Count + 1; i++)
             {
-                for(int j = 0; j < certIndex.Count; j++)
+                newEmployeeFound = true;
+
+                for (int j = 0; j < certIndex.Count; j++)
                 {
-                    if(employees.cert[i][j] == "1")
+                    if (employees.cert[i][certIndex[j]] == "1")
                     {
-                        result.namesWithCert.Add(employees.names[i]);
-                        result.howManyOfEachCertExists[certIndex[j]] += 1;
-                        j = certIndex.Count;
+                        if(newEmployeeFound)
+                        {
+                            name = employees.names[i - 1];
+                            id = employees.ids[i - 1];
+                            newEmployeeFound = false;
+                        }
+
+                        result.howManyOfEachCertExists[j] += 1;
+                        lCert.Add(employees.cert[0][certIndex[j]]);
                     }
                 }
+
+                List<String> newList = new List<String>(lCert);
+
+                if(!newEmployeeFound)
+                    result.listOfAvailableEmpoyees.Add(new ChoosenEmployee(name, id, newList));
+                name = "";
+                id = -1;
+                lCert.Clear();
             }
 
-            return "";
+            //int nrOfCertFound = 0;
+            //
+            //for (int i = 1; i < employees.names.Count + 1; i++)
+            //{
+            //    //Skip the "count" variable all together
+            //    //Instead remove the item finished from certIndex. So if all people needed for index 1
+            //    //in certIndex has been found then remove it from certIndex.
+            //    for (int j = 0; j < certIndex.Count; j++) 
+            //    {
+            //        if(employees.cert[i][certIndex[j]] == "1")
+            //        {
+            //            result.namesWithCert.Add(employees.names[i - 1]);
+            //            result.howManyOfEachCertExists[j] += 1;
+            //            
+            //            nrOfCertFound++;
+            //
+            //            if (certForJob[j].Count == nrOfCertFound)
+            //            {
+            //                certIndex.RemoveAt(j);
+            //                nrOfCertFound = 0;
+            //            }
+            //
+            //            j = certIndex.Count;
+            //        }
+            //    }
+            //}
+
+            calcTotalWorksHoursAvailable(hoursPredictedToCompleteJob, reqDaysToFinishJob, copyOfCertIndex);
+
+            return result;
         }
 
-        /// <summary>
-        /// Just calculates the number of employees with right cert we have in 
-        /// total and per certificate.
-        /// </summary>
-        private void calcCertNeeded()
-        {
-            int count = 0;
-            int total = 0;
-
-            for (int i = 0; i < result.reqForTheJob.Count; i++)
-            {
-                count = result.reqForTheJob[i].Count - result.howManyOfEachCertExists[i];
-                result.howManyMoreOfEachCertNeeded.Add(count);
-                total += count;
-            }
-
-            needToTrainMorePeople(total);
-        }
-
-        /// <summary>
-        /// Calculates how much time our available employees with right cert can work
-        /// and checks it against the request time limit.
-        /// </summary>
-        /// <param name="hoursToCompleteJob"></param>
-        /// <param name="reqDaysToFinishJob"></param>
-        private void calcTotalWorksHoursAvailable(int hoursToCompleteJob, int reqDaysToFinishJob)
-        {
-            for (int i = 0; i < result.howManyOfEachCertExists.Count; i++)
-                result.timeNeeded += result.howManyOfEachCertExists[i] * 8 * reqDaysToFinishJob;
-
-            int days = result.timeNeeded / 8;
-
-            //Checks if the job can be completed in the req days
-            if (days <= reqDaysToFinishJob)
-                result.canCompleteInReqDays = true;
-            else
-                result.canCompleteInReqDays = false;
-
-        }
-
-        private void needToTrainMorePeople(int nrOfPeopleNeeded)
-        {
-            if(nrOfPeopleNeeded > 0)
-            {
-
-            }
-        }
 
         /// <summary>
         /// Gets all the employees names and certs from database and put them
@@ -140,21 +146,24 @@ namespace CMS
             }
             dr.Close();
 
-            cmd.CommandText = "select Name from Employees";
+
+            cmd.CommandText = "select Id, Name from Employees";
             dr = cmd.ExecuteReader();
 
             Dictionary<string, int> employeeListIndex = new Dictionary<string, int>();
             while (dr.Read())
             {
-                employees.names.Add(dr[0].ToString());
+                employees.ids.Add(Int32.Parse(dr[0].ToString()));
+                employees.names.Add(dr[1].ToString());
                 employees.cert.Add(new List<String>());
                 nrOfNames++;
 
                 int index = nrOfNames - 1;
-                employeeListIndex.Add(dr[0].ToString(), index);
+                employeeListIndex.Add(dr[1].ToString(), index);
             }
 
             dr.Close();
+
 
             for (int i = 1; i < nrOfNames + 1; i++)
             {
@@ -192,14 +201,107 @@ namespace CMS
             con.Close();
         }
 
+
+        /// <summary>
+        /// Calculates how much time our available employees with right cert can work
+        /// and checks it against the request time limit.
+        /// </summary>
+        /// <param name="hoursToCompleteJob"></param>
+        /// <param name="reqDaysToFinishJob"></param>
+        private void calcTotalWorksHoursAvailable(int hoursPredictedToCompleteJob, int reqDaysToFinishJob, List<int> certIndex)
+        {
+            int certCount = 0;
+            for (int i = 0; i < result.howManyOfEachCertExists.Count; i++)
+            {
+                if (result.howManyOfEachCertExists[i] > result.reqForTheJob[i].Count)
+                {
+                    certCount = result.reqForTheJob[i].Count;
+                    result.timeNeeded += certCount * 8 * reqDaysToFinishJob;
+                }
+                else
+                {
+                    result.timeNeeded += result.reqForTheJob[i].Count * 8 * reqDaysToFinishJob;
+                }
+            } 
+
+            //Checks if the job can be completed in the req days
+            if (result.timeNeeded >= hoursPredictedToCompleteJob)
+                result.canCompleteInReqDays = true;
+            else
+                result.canCompleteInReqDays = false;
+
+            calcCertNeeded(certIndex);
+
+        }
+
+
+        /// <summary>
+        /// Just calculates the number of employees with right cert we have in 
+        /// total and per certificate.
+        /// </summary>
+        private void calcCertNeeded(List<int> certIndex)
+        {
+            int count = 0;
+            int total = 0;
+
+            for (int i = 0; i < result.reqForTheJob.Count; i++)
+            {
+                count = result.reqForTheJob[i].Count - result.howManyOfEachCertExists[i];
+                if (count < 0)
+                    count = 0;
+                result.howManyMoreOfEachCertNeeded.Add(count);
+                total += count;
+            }
+
+           needToTrainMorePeople(total, certIndex);
+        } 
+
+
+        private void needToTrainMorePeople(int nrOfPeopleNeeded, List<int> certIndex)
+        {
+            List<int> listOfCost = new List<int>();
+            String tmp = "";
+            int totalCost = 0;
+
+            if(nrOfPeopleNeeded > 0)
+            {
+                con.Open();
+                int x = 0;
+
+                string sqlQuery = "select Cost from Certifications";
+                cmd = new SqlCommand(sqlQuery, con);
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    tmp = dr["Cost"].ToString();
+                    x = Int32.Parse(tmp);
+                    listOfCost.Add(x);
+                }
+                dr.Close();
+
+                for(int i = 0; i < result.howManyMoreOfEachCertNeeded.Count; i++)
+                {
+                    if(result.howManyMoreOfEachCertNeeded[i] > 0)
+                    {
+                        totalCost += listOfCost[certIndex[i]] * result.howManyMoreOfEachCertNeeded[i];
+                    }
+                }
+
+            }
+
+            result.costToTrainMorePeople = totalCost;
+        }
+
+
         /// <summary>
         /// Clears all the lists and variables.
         /// </summary>
         public void clearEmployeeList()
         {
             employees.ClearList();
-            //result.clearList();
+            result.ClearList();
             nrOfDiffCert = 0;
+            int dsd = 0;
         }
     }
 }
