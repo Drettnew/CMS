@@ -49,24 +49,16 @@ namespace CMS
 
         private void test34()
         {
-            JobCertReqList t1 = new JobCertReqList();
-            JobCertReqList t2 = new JobCertReqList();
-            JobCertReqList t3 = new JobCertReqList();
-            t1.Certificate = "EON";
-            t1.Count = 2;
-            t2.Certificate = "Atlas Copco";
-            t2.Count = 2;
-            t3.Certificate = "SSG utbild";
-            t3.Count = 2;
+            //double tmp = hoursPredictedToCompleteJob / (8.0 * reqDaysToFinishJob);
+            //double tmp1 = Math.Ceiling(tmp);
+            //double tmp2 = tmp1 - (double)result.nrOfActualPeopleFound;
+            int i = 880;
+            int d = 20;
+            int p = 2;
 
-            List<JobCertReqList> certForJob = new List<JobCertReqList>();
-            certForJob.Add(t1);
-            certForJob.Add(t2);
-            certForJob.Add(t3);
-
-            result = mBase.CheckJobReqWithEmployees(certForJob, 150, 25);
-            mBase.clearEmployeeList();
-
+            double tmp = i / (8.0 * d);
+            int tmp1 = (int)Math.Ceiling(tmp);
+            double tmp2 = tmp1 - p;
         }
 
         private void FormMain_Load(object sender, EventArgs e)

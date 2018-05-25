@@ -41,6 +41,7 @@ namespace CMS.SelfCreatedLists
         public bool moreCertNeeded;
         public int timeNeeded;
         public int nrOfActualPeopleFound;
+        public int nrOfExtraPeopleNeeded;
 
         public ListOfOutPutsFromModelBase()
         {
@@ -49,6 +50,7 @@ namespace CMS.SelfCreatedLists
             moreCertNeeded = false;
             nrOfActualPeopleFound = 0;
             totalCostForCert = 0;
+            nrOfExtraPeopleNeeded = 0;
         }
 
         public void ClearList()
@@ -63,6 +65,7 @@ namespace CMS.SelfCreatedLists
             moreCertNeeded = false;
             nrOfActualPeopleFound = 0;
             totalCostForCert = 0;
+            nrOfExtraPeopleNeeded = 0;
         }
     }
 }

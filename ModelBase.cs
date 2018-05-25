@@ -192,19 +192,22 @@ namespace CMS
         /// <param name="reqDaysToFinishJob"></param>
         private void calcTotalWorksHoursAvailable(int hoursPredictedToCompleteJob, int reqDaysToFinishJob, List<int> certIndex)
         {
-            for (int i = 0; i < result.howManyOfEachCertExists.Count; i++)
-            {
-                if (result.nrOfActualPeopleFound > 0)
-                    result.timeNeeded = result.nrOfActualPeopleFound * 8 * reqDaysToFinishJob;
-                else
-                    result.timeNeeded = 0;
-            } 
+            if (result.nrOfActualPeopleFound > 0)
+                result.timeNeeded = result.nrOfActualPeopleFound * 8 * reqDaysToFinishJob;
+            else
+                result.timeNeeded = 0;
 
             //Checks if the job can be completed in the req days
             if (result.timeNeeded >= hoursPredictedToCompleteJob)
                 result.canCompleteInReqDays = true;
             else
+            {
                 result.canCompleteInReqDays = false;
+                double tmp = hoursPredictedToCompleteJob / (8.0 * reqDaysToFinishJob);
+                int tmp1 = (int)Math.Ceiling(tmp);
+                int tmp2 = tmp1 - result.nrOfActualPeopleFound;
+                result.nrOfExtraPeopleNeeded = tmp2;
+            }
 
             calcCertNeeded(certIndex, hoursPredictedToCompleteJob);
 
