@@ -29,6 +29,8 @@ namespace CMS
         bool menu_Cert_show = false;
         int menu_Cert_size = 0;
 
+        bool fillingList = false;
+
         EmployeeChanges employee = new EmployeeChanges();
         List<JobCertReqList> reqCert;
         ModelBase mBase = new ModelBase();
@@ -133,6 +135,8 @@ namespace CMS
 
         private void fillTable()
         {
+            fillingList = true;
+
             mainGridView.Rows.Clear();
             mainGridView.Refresh();
             
@@ -151,7 +155,7 @@ namespace CMS
 
             dr.Close();
             cmd.CommandText = "select Employees.name, Certifications.Name, EmployeeCertification.Expiration_Date," +
-                                " EmployeeCertification.Expiration_Date, EmployeeCertification.Additional_Info" +
+                                " EmployeeCertification.Additional_Info" +
                                 " from Certifications" +
                                 " join EmployeeCertification on Certifications.Id = EmployeeCertification.CertificationId" +
                                 " join Employees on Employees.Id = EmployeeCertification.EmployeeId";
@@ -164,15 +168,21 @@ namespace CMS
                 if (!DBNull.Value.Equals(dr[2]))
                 {
                     mainGridView.Rows[index].Cells[dr[1].ToString()].Value = Convert.ToDateTime(dr[2]).ToShortDateString();
+                }else if (!DBNull.Value.Equals(dr[3]))
+                {
+                    mainGridView.Rows[index].Cells[dr[1].ToString()].Value = dr[3].ToString();
                 }
                 else
                 {
-                    mainGridView.Rows[index].Cells[dr[1].ToString()].Value = "Have";
+                    mainGridView.Rows[index].Cells[dr[1].ToString()].Value = "Yes";
                 }
                     
             }
             dr.Close();
             con.Close();
+
+            fillingList = false;
+            mainGridView.Rows[0].Selected = true;
         }
 
         private void fillListBox()
@@ -286,21 +296,28 @@ namespace CMS
                 for (int i = 0; i < employee.EditCertId.Count; i++)
                 {
                     cmd.CommandText = "update EmployeeCertification set ";
-                    if (employee.EditCertAdditInfo[i] != "")
+                    if (employee.EditCertAdditInfo.Count > 0)
                     {
-                        cmd.CommandText += "Additional_info = \'" + employee.EditCertAdditInfo[i] + "\'";
+                        if (employee.EditCertAdditInfo[i] != "")
+                        {
+                            cmd.CommandText += "Additional_info = \'" + employee.EditCertAdditInfo[i] + "\'";
+                        }
+                        else
+                        {
+                            cmd.CommandText += "Additional_info = " + "NULL";
+                        }
                     }
-                    else
+                    
+                    if(employee.EditCertDate.Count > 0)
                     {
-                        cmd.CommandText += "Additional_info = " + "NULL";
-                    }
-                    if (employee.EditCertDate[i] != "NULL")
-                    {
-                        cmd.CommandText += ", Expiration_Date = \'" + DateTime.Parse(employee.EditCertDate[i]).Date + "\'";
-                    }
-                    else
-                    {
-                        cmd.CommandText += ", Expiration_Date = " + "NULL";
+                        if (employee.EditCertDate[i] != "NULL")
+                        {
+                            cmd.CommandText += ", Expiration_Date = \'" + DateTime.Parse(employee.EditCertDate[i]).Date + "\'";
+                        }
+                        else
+                        {
+                            cmd.CommandText += ", Expiration_Date = " + "NULL";
+                        }
                     }
 
                     cmd.CommandText += " where EmployeeId = " + mainGridView.SelectedRows[0].Cells["Id"].Value.ToString() +
@@ -420,7 +437,6 @@ namespace CMS
                 if (employee.CertId.Contains(item.Key))
                 {
                     TextAdditInfo.Text = employee.CertAdditInfo[employee.CertId.IndexOf(item.Key)];
-                    textBoxDate.Text = employee.CertDate[employee.CertId.IndexOf(item.Key)];
                     if (employee.CertDate[employee.CertId.IndexOf(item.Key)] != "NULL")
                     {
                         AddDateCheckBox.Checked = true;
@@ -434,7 +450,6 @@ namespace CMS
                 else if (employee.AddCertId.Contains(item.Key))
                 {
                     TextAdditInfo.Text = employee.AddCertAdditInfo[employee.AddCertId.IndexOf(item.Key)];
-                    textBoxDate.Text = employee.AddCertDate[employee.AddCertId.IndexOf(item.Key)];
                     if (employee.AddCertDate[employee.AddCertId.IndexOf(item.Key)] != "NULL")
                     {
                         AddDateCheckBox.Checked = true;
@@ -520,14 +535,6 @@ namespace CMS
                 {
                     employee.EditCertId.Add(item.Key);
                     employee.EditCertAdditInfo.Add(TextAdditInfo.Text);
-                    if (textBoxDate.Text != "NULL")
-                    {
-                        employee.EditCertDate.Add(textBoxDate.Text);
-                    }
-                    else
-                    {
-                        employee.EditCertDate.Add("NULL");
-                    }
                 }
             }
         }
@@ -620,7 +627,7 @@ namespace CMS
 
         private void mainGridView_SelectionChanged(object sender, EventArgs e)
         {
-            if (menu_Employee_show && buttonControl.Text == "Confirm Edit" && mainGridView.SelectedRows.Count > 0)
+            if (menu_Employee_show && buttonControl.Text == "Confirm Edit" && mainGridView.SelectedRows.Count > 0 && !fillingList)
             {
                 fillListBox();
 
@@ -864,6 +871,8 @@ namespace CMS
                 labelCost.Text = totalCost.ToString() + " kr ";
 
                 varning1.Visible = !result.canCompleteInReqDays;
+                panelExtraPeop.Visible = !result.canCompleteInReqDays;
+
                 if (result.moreCertNeeded)
                 {
                     PanelMissingCertMain.Visible = true;
@@ -877,7 +886,7 @@ namespace CMS
                     }
                 }
 
-                totalCertCostLabel.Text = result.totalCostForCert.ToString() + " kr ";
+                totalCertCostLabel.Text = Math.Ceiling(result.totalCostForCert).ToString() + " kr ";
             }
             else
             {

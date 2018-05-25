@@ -36,6 +36,8 @@
             this.certificationsDatabaseDataSet = new CMS.CertificationsDatabaseDataSet();
             this.menuButton = new System.Windows.Forms.Button();
             this.jobMenu = new System.Windows.Forms.Panel();
+            this.totalCertCostLabel = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             this.PanelMissingCertMain = new System.Windows.Forms.Panel();
             this.labelCost = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -62,7 +64,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.AddDateCheckBox = new System.Windows.Forms.CheckBox();
             this.dateCert = new System.Windows.Forms.DateTimePicker();
-            this.textBoxDate = new System.Windows.Forms.TextBox();
             this.buttonCertDelete = new System.Windows.Forms.Button();
             this.buttonCertAdd = new System.Windows.Forms.Button();
             this.comboAllCerts = new System.Windows.Forms.ComboBox();
@@ -84,8 +85,9 @@
             this.buttonCertNew = new System.Windows.Forms.Button();
             this.comboBoxCerts = new System.Windows.Forms.ComboBox();
             this.buttonCerts = new System.Windows.Forms.Button();
-            this.label12 = new System.Windows.Forms.Label();
-            this.totalCertCostLabel = new System.Windows.Forms.Label();
+            this.panelExtraPeop = new System.Windows.Forms.Panel();
+            this.label13 = new System.Windows.Forms.Label();
+            this.labelExtraPeople = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.mainGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.certificationsDatabaseDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.certificationsDatabaseDataSet)).BeginInit();
@@ -96,6 +98,7 @@
             this.panelEmployees.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.certificationsBindingSource)).BeginInit();
             this.certMenu.SuspendLayout();
+            this.panelExtraPeop.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainGridView
@@ -156,6 +159,7 @@
             // 
             this.jobMenu.BackColor = System.Drawing.SystemColors.ControlLight;
             this.jobMenu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.jobMenu.Controls.Add(this.panelExtraPeop);
             this.jobMenu.Controls.Add(this.totalCertCostLabel);
             this.jobMenu.Controls.Add(this.label12);
             this.jobMenu.Controls.Add(this.PanelMissingCertMain);
@@ -176,6 +180,25 @@
             this.jobMenu.Name = "jobMenu";
             this.jobMenu.Size = new System.Drawing.Size(346, 500);
             this.jobMenu.TabIndex = 3;
+            // 
+            // totalCertCostLabel
+            // 
+            this.totalCertCostLabel.AutoSize = true;
+            this.totalCertCostLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.totalCertCostLabel.Location = new System.Drawing.Point(13, 240);
+            this.totalCertCostLabel.MinimumSize = new System.Drawing.Size(145, 2);
+            this.totalCertCostLabel.Name = "totalCertCostLabel";
+            this.totalCertCostLabel.Size = new System.Drawing.Size(145, 15);
+            this.totalCertCostLabel.TabIndex = 18;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(10, 223);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(145, 13);
+            this.label12.TabIndex = 17;
+            this.label12.Text = "Cost for all Certifications used";
             // 
             // PanelMissingCertMain
             // 
@@ -370,7 +393,6 @@
             this.panelEmployees.Controls.Add(this.label2);
             this.panelEmployees.Controls.Add(this.AddDateCheckBox);
             this.panelEmployees.Controls.Add(this.dateCert);
-            this.panelEmployees.Controls.Add(this.textBoxDate);
             this.panelEmployees.Controls.Add(this.buttonCertDelete);
             this.panelEmployees.Controls.Add(this.buttonCertAdd);
             this.panelEmployees.Controls.Add(this.comboAllCerts);
@@ -431,14 +453,6 @@
             this.dateCert.Size = new System.Drawing.Size(150, 20);
             this.dateCert.TabIndex = 9;
             this.dateCert.Visible = false;
-            // 
-            // textBoxDate
-            // 
-            this.textBoxDate.Location = new System.Drawing.Point(6, 380);
-            this.textBoxDate.Name = "textBoxDate";
-            this.textBoxDate.Size = new System.Drawing.Size(239, 20);
-            this.textBoxDate.TabIndex = 8;
-            this.textBoxDate.TextChanged += new System.EventHandler(this.textBoxDate_TextChanged);
             // 
             // buttonCertDelete
             // 
@@ -561,7 +575,7 @@
             this.certMenu.Controls.Add(this.buttonCertRemove);
             this.certMenu.Controls.Add(this.buttonCertNew);
             this.certMenu.Controls.Add(this.comboBoxCerts);
-            this.certMenu.Location = new System.Drawing.Point(465, 379);
+            this.certMenu.Location = new System.Drawing.Point(725, 45);
             this.certMenu.Name = "certMenu";
             this.certMenu.Size = new System.Drawing.Size(250, 500);
             this.certMenu.TabIndex = 7;
@@ -631,39 +645,47 @@
             this.buttonCerts.UseVisualStyleBackColor = true;
             this.buttonCerts.Click += new System.EventHandler(this.buttonCerts_Click);
             // 
-            // label12
+            // panelExtraPeop
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(10, 223);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(145, 13);
-            this.label12.TabIndex = 17;
-            this.label12.Text = "Cost for all Certifications used";
+            this.panelExtraPeop.Controls.Add(this.labelExtraPeople);
+            this.panelExtraPeop.Controls.Add(this.label13);
+            this.panelExtraPeop.Location = new System.Drawing.Point(164, 219);
+            this.panelExtraPeop.Name = "panelExtraPeop";
+            this.panelExtraPeop.Size = new System.Drawing.Size(141, 49);
+            this.panelExtraPeop.TabIndex = 19;
             // 
-            // totalCertCostLabel
+            // label13
             // 
-            this.totalCertCostLabel.AutoSize = true;
-            this.totalCertCostLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.totalCertCostLabel.Location = new System.Drawing.Point(13, 240);
-            this.totalCertCostLabel.MinimumSize = new System.Drawing.Size(145, 0);
-            this.totalCertCostLabel.Name = "totalCertCostLabel";
-            this.totalCertCostLabel.Size = new System.Drawing.Size(145, 15);
-            this.totalCertCostLabel.TabIndex = 18;
-            this.totalCertCostLabel.Text = "label13";
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(3, 5);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(130, 13);
+            this.label13.TabIndex = 0;
+            this.label13.Text = "Nr of extra people needed";
+            // 
+            // labelExtraPeople
+            // 
+            this.labelExtraPeople.AutoSize = true;
+            this.labelExtraPeople.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.labelExtraPeople.Location = new System.Drawing.Point(6, 21);
+            this.labelExtraPeople.MinimumSize = new System.Drawing.Size(50, 2);
+            this.labelExtraPeople.Name = "labelExtraPeople";
+            this.labelExtraPeople.Size = new System.Drawing.Size(50, 15);
+            this.labelExtraPeople.TabIndex = 19;
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(987, 566);
-            this.Controls.Add(this.jobMenu);
-            this.Controls.Add(this.certMenu);
             this.Controls.Add(this.buttonCerts);
-            this.Controls.Add(this.panelEmployees);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonEdit);
             this.Controls.Add(this.buttonNew);
             this.Controls.Add(this.menuButton);
+            this.Controls.Add(this.jobMenu);
+            this.Controls.Add(this.certMenu);
+            this.Controls.Add(this.panelEmployees);
             this.Controls.Add(this.mainGridView);
             this.Name = "FormMain";
             this.Text = "Form1";
@@ -684,6 +706,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.certificationsBindingSource)).EndInit();
             this.certMenu.ResumeLayout(false);
             this.certMenu.PerformLayout();
+            this.panelExtraPeop.ResumeLayout(false);
+            this.panelExtraPeop.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -710,7 +734,6 @@
         private CertificationsDatabaseDataSetTableAdapters.CertificationsTableAdapter certificationsTableAdapter;
         private System.Windows.Forms.Button buttonCertAdd;
         private System.Windows.Forms.Button buttonCertDelete;
-        private System.Windows.Forms.TextBox textBoxDate;
         private System.Windows.Forms.CheckBox AddDateCheckBox;
         private System.Windows.Forms.DateTimePicker dateCert;
         private System.Windows.Forms.Panel certMenu;
@@ -746,6 +769,9 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label totalCertCostLabel;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Panel panelExtraPeop;
+        private System.Windows.Forms.Label labelExtraPeople;
+        private System.Windows.Forms.Label label13;
     }
 }
 
