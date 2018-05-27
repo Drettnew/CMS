@@ -197,7 +197,7 @@ namespace CMS
             else
                 result.timeNeeded = 0;
 
-            //Checks if the job can be completed in the req days
+            //Checks if the job can be completed in the predicted time, if not calc how many more ppl are needed to finish in time.
             if (result.timeNeeded >= hoursPredictedToCompleteJob)
                 result.canCompleteInReqDays = true;
             else
