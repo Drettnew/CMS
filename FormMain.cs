@@ -89,6 +89,7 @@ namespace CMS
                 textBox1.Text = "1";
                 varning1.Visible = false;
                 PanelMissingCertMain.Visible = false;
+                panelExtraPeop.Visible = false;
 
                 mainGridView.Width = mainGridView.Width - menu_job_size;
                 jobMenu.Width = menu_job_size;
@@ -671,14 +672,13 @@ namespace CMS
             }
         }
 
-        private void textBoxCertCost_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-
         private void textBoxCertCost_KeyPress(object sender, KeyPressEventArgs e)
         {
-            
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+            (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
         }
 
         private void buttonApply_Click(object sender, EventArgs e)
@@ -703,7 +703,7 @@ namespace CMS
 
         private void buttonCertNew_Click(object sender, EventArgs e)
         {
-            if (menu_Cert_show)
+            if (menu_Cert_show && textBoxCertName.Text != "" && textBoxCertCost.Text != "")
             {
                 con.Open();
                 KeyValuePair<string, string> item = (KeyValuePair<string, string>)comboBoxCerts.SelectedItem;
@@ -864,7 +864,7 @@ namespace CMS
 
                 varning1.Visible = !result.canCompleteInReqDays;
                 panelExtraPeop.Visible = !result.canCompleteInReqDays;
-
+                labelExtraPeople.Text = result.nrOfExtraPeopleNeeded.ToString();
                 if (result.moreCertNeeded)
                 {
                     PanelMissingCertMain.Visible = true;

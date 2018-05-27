@@ -36,6 +36,9 @@
             this.certificationsDatabaseDataSet = new CMS.CertificationsDatabaseDataSet();
             this.menuButton = new System.Windows.Forms.Button();
             this.jobMenu = new System.Windows.Forms.Panel();
+            this.panelExtraPeop = new System.Windows.Forms.Panel();
+            this.labelExtraPeople = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.totalCertCostLabel = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.PanelMissingCertMain = new System.Windows.Forms.Panel();
@@ -78,6 +81,9 @@
             this.buttonDelete = new System.Windows.Forms.Button();
             this.certificationsTableAdapter = new CMS.CertificationsDatabaseDataSetTableAdapters.CertificationsTableAdapter();
             this.certMenu = new System.Windows.Forms.Panel();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
             this.buttonApply = new System.Windows.Forms.Button();
             this.textBoxCertCost = new System.Windows.Forms.TextBox();
             this.textBoxCertName = new System.Windows.Forms.TextBox();
@@ -85,20 +91,17 @@
             this.buttonCertNew = new System.Windows.Forms.Button();
             this.comboBoxCerts = new System.Windows.Forms.ComboBox();
             this.buttonCerts = new System.Windows.Forms.Button();
-            this.panelExtraPeop = new System.Windows.Forms.Panel();
-            this.label13 = new System.Windows.Forms.Label();
-            this.labelExtraPeople = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.mainGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.certificationsDatabaseDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.certificationsDatabaseDataSet)).BeginInit();
             this.jobMenu.SuspendLayout();
+            this.panelExtraPeop.SuspendLayout();
             this.PanelMissingCertMain.SuspendLayout();
             this.panel1.SuspendLayout();
             this.varning1.SuspendLayout();
             this.panelEmployees.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.certificationsBindingSource)).BeginInit();
             this.certMenu.SuspendLayout();
-            this.panelExtraPeop.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainGridView
@@ -180,6 +183,34 @@
             this.jobMenu.Name = "jobMenu";
             this.jobMenu.Size = new System.Drawing.Size(346, 500);
             this.jobMenu.TabIndex = 3;
+            // 
+            // panelExtraPeop
+            // 
+            this.panelExtraPeop.Controls.Add(this.labelExtraPeople);
+            this.panelExtraPeop.Controls.Add(this.label13);
+            this.panelExtraPeop.Location = new System.Drawing.Point(164, 219);
+            this.panelExtraPeop.Name = "panelExtraPeop";
+            this.panelExtraPeop.Size = new System.Drawing.Size(141, 49);
+            this.panelExtraPeop.TabIndex = 19;
+            // 
+            // labelExtraPeople
+            // 
+            this.labelExtraPeople.AutoSize = true;
+            this.labelExtraPeople.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.labelExtraPeople.Location = new System.Drawing.Point(6, 21);
+            this.labelExtraPeople.MinimumSize = new System.Drawing.Size(50, 2);
+            this.labelExtraPeople.Name = "labelExtraPeople";
+            this.labelExtraPeople.Size = new System.Drawing.Size(50, 15);
+            this.labelExtraPeople.TabIndex = 19;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(3, 5);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(130, 13);
+            this.label13.TabIndex = 0;
+            this.label13.Text = "Nr of extra people needed";
             // 
             // totalCertCostLabel
             // 
@@ -328,7 +359,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(93, 23);
             this.button3.TabIndex = 7;
-            this.button3.Text = "Calculate job";
+            this.button3.Text = "Calculate";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -569,6 +600,9 @@
             // 
             this.certMenu.BackColor = System.Drawing.SystemColors.ControlLight;
             this.certMenu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.certMenu.Controls.Add(this.label16);
+            this.certMenu.Controls.Add(this.label15);
+            this.certMenu.Controls.Add(this.label14);
             this.certMenu.Controls.Add(this.buttonApply);
             this.certMenu.Controls.Add(this.textBoxCertCost);
             this.certMenu.Controls.Add(this.textBoxCertName);
@@ -580,9 +614,36 @@
             this.certMenu.Size = new System.Drawing.Size(250, 500);
             this.certMenu.TabIndex = 7;
             // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(3, 110);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(63, 13);
+            this.label16.TabIndex = 14;
+            this.label16.Text = "Cost to train";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(3, 57);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(35, 13);
+            this.label15.TabIndex = 13;
+            this.label15.Text = "Name";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(4, 5);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(143, 13);
+            this.label14.TabIndex = 12;
+            this.label14.Text = "Current Existing Certifications";
+            // 
             // buttonApply
             // 
-            this.buttonApply.Location = new System.Drawing.Point(159, 98);
+            this.buttonApply.Location = new System.Drawing.Point(159, 126);
             this.buttonApply.Name = "buttonApply";
             this.buttonApply.Size = new System.Drawing.Size(86, 23);
             this.buttonApply.TabIndex = 11;
@@ -596,7 +657,6 @@
             this.textBoxCertCost.Name = "textBoxCertCost";
             this.textBoxCertCost.Size = new System.Drawing.Size(100, 20);
             this.textBoxCertCost.TabIndex = 10;
-            this.textBoxCertCost.TextChanged += new System.EventHandler(this.textBoxCertCost_TextChanged);
             this.textBoxCertCost.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxCertCost_KeyPress);
             // 
             // textBoxCertName
@@ -608,7 +668,7 @@
             // 
             // buttonCertRemove
             // 
-            this.buttonCertRemove.Location = new System.Drawing.Point(170, 32);
+            this.buttonCertRemove.Location = new System.Drawing.Point(170, 55);
             this.buttonCertRemove.Name = "buttonCertRemove";
             this.buttonCertRemove.Size = new System.Drawing.Size(75, 23);
             this.buttonCertRemove.TabIndex = 8;
@@ -618,7 +678,7 @@
             // 
             // buttonCertNew
             // 
-            this.buttonCertNew.Location = new System.Drawing.Point(170, 3);
+            this.buttonCertNew.Location = new System.Drawing.Point(170, 21);
             this.buttonCertNew.Name = "buttonCertNew";
             this.buttonCertNew.Size = new System.Drawing.Size(75, 23);
             this.buttonCertNew.TabIndex = 7;
@@ -629,7 +689,7 @@
             // comboBoxCerts
             // 
             this.comboBoxCerts.FormattingEnabled = true;
-            this.comboBoxCerts.Location = new System.Drawing.Point(3, 3);
+            this.comboBoxCerts.Location = new System.Drawing.Point(3, 21);
             this.comboBoxCerts.Name = "comboBoxCerts";
             this.comboBoxCerts.Size = new System.Drawing.Size(110, 21);
             this.comboBoxCerts.TabIndex = 6;
@@ -645,34 +705,6 @@
             this.buttonCerts.UseVisualStyleBackColor = true;
             this.buttonCerts.Click += new System.EventHandler(this.buttonCerts_Click);
             // 
-            // panelExtraPeop
-            // 
-            this.panelExtraPeop.Controls.Add(this.labelExtraPeople);
-            this.panelExtraPeop.Controls.Add(this.label13);
-            this.panelExtraPeop.Location = new System.Drawing.Point(164, 219);
-            this.panelExtraPeop.Name = "panelExtraPeop";
-            this.panelExtraPeop.Size = new System.Drawing.Size(141, 49);
-            this.panelExtraPeop.TabIndex = 19;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(3, 5);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(130, 13);
-            this.label13.TabIndex = 0;
-            this.label13.Text = "Nr of extra people needed";
-            // 
-            // labelExtraPeople
-            // 
-            this.labelExtraPeople.AutoSize = true;
-            this.labelExtraPeople.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.labelExtraPeople.Location = new System.Drawing.Point(6, 21);
-            this.labelExtraPeople.MinimumSize = new System.Drawing.Size(50, 2);
-            this.labelExtraPeople.Name = "labelExtraPeople";
-            this.labelExtraPeople.Size = new System.Drawing.Size(50, 15);
-            this.labelExtraPeople.TabIndex = 19;
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -683,10 +715,10 @@
             this.Controls.Add(this.buttonEdit);
             this.Controls.Add(this.buttonNew);
             this.Controls.Add(this.menuButton);
-            this.Controls.Add(this.jobMenu);
-            this.Controls.Add(this.certMenu);
             this.Controls.Add(this.panelEmployees);
             this.Controls.Add(this.mainGridView);
+            this.Controls.Add(this.jobMenu);
+            this.Controls.Add(this.certMenu);
             this.Name = "FormMain";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.FormMain_Load);
@@ -695,6 +727,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.certificationsDatabaseDataSet)).EndInit();
             this.jobMenu.ResumeLayout(false);
             this.jobMenu.PerformLayout();
+            this.panelExtraPeop.ResumeLayout(false);
+            this.panelExtraPeop.PerformLayout();
             this.PanelMissingCertMain.ResumeLayout(false);
             this.PanelMissingCertMain.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -706,8 +740,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.certificationsBindingSource)).EndInit();
             this.certMenu.ResumeLayout(false);
             this.certMenu.PerformLayout();
-            this.panelExtraPeop.ResumeLayout(false);
-            this.panelExtraPeop.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -772,6 +804,9 @@
         private System.Windows.Forms.Panel panelExtraPeop;
         private System.Windows.Forms.Label labelExtraPeople;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label14;
     }
 }
 
