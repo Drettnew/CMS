@@ -30,6 +30,7 @@ namespace CMS
         int menu_Cert_size = 0;
 
         bool fillingList = false;
+        bool ignoreDate = false;
 
         EmployeeChanges employee = new EmployeeChanges();
         List<JobCertReqList> reqCert;
@@ -427,33 +428,23 @@ namespace CMS
             if(menu_Employee_show && listboxCurrentCerts.Items.Count > 0 && listboxCurrentCerts.SelectedIndex >= 0)
             {
                 KeyValuePair<string, string> item = (KeyValuePair<string, string>)listboxCurrentCerts.SelectedItem;
-                if (employee.CertId.Contains(item.Key))
+
+                string additInfo = employee.GetAdditInfo(item.Key);
+                string date = employee.GetDate(item.Key);
+
+                TextAdditInfo.Text = additInfo;
+
+                ignoreDate = true;
+
+                if (date != "NULL")
                 {
-                    TextAdditInfo.Text = employee.CertAdditInfo[employee.CertId.IndexOf(item.Key)];
-                    if (employee.CertDate[employee.CertId.IndexOf(item.Key)] != "NULL")
-                    {
-                        AddDateCheckBox.Checked = true;
-                        dateCert.Value = DateTime.Parse(employee.CertDate[employee.CertId.IndexOf(item.Key)]);
-                    }
-                    else
-                    {
-                        AddDateCheckBox.Checked = false;
-                    }
+                    AddDateCheckBox.Checked = true;
+                    dateCert.Value = DateTime.Parse(date);
                 }
-                else if (employee.AddCertId.Contains(item.Key))
+                else
                 {
-                    TextAdditInfo.Text = employee.AddCertAdditInfo[employee.AddCertId.IndexOf(item.Key)];
-                    if (employee.AddCertDate[employee.AddCertId.IndexOf(item.Key)] != "NULL")
-                    {
-                        AddDateCheckBox.Checked = true;
-                        dateCert.Value = DateTime.Parse(employee.AddCertDate[employee.AddCertId.IndexOf(item.Key)]);
-                    }
-                    else
-                    {
-                        AddDateCheckBox.Checked = false;
-                    }
+                    AddDateCheckBox.Checked = false;
                 }
-                
             }
         }
 
@@ -528,6 +519,10 @@ namespace CMS
                 {
                     employee.EditCertId.Add(item.Key);
                     employee.EditCertAdditInfo.Add(TextAdditInfo.Text);
+                    if (AddDateCheckBox.Checked)
+                        employee.EditCertDate.Add(dateCert.Value.ToShortDateString());
+                    else
+                        employee.EditCertDate.Add("NULL");
                 }
             }
         }
@@ -564,7 +559,7 @@ namespace CMS
                                 employee.EditCertAdditInfo.Add(employee.CertAdditInfo[employee.CertId.IndexOf(item.Key)]);
                                 employee.EditCertDate.Add(dateCert.Value.ToShortDateString());
                             }
-                            employee.CertDate[employee.CertId.IndexOf(item.Key)] = dateCert.Value.ToShortDateString();
+                            
                         }
                     }
                     else
@@ -585,35 +580,39 @@ namespace CMS
                         }
                     }
                 }
-                else if(listboxCurrentCerts.SelectedIndex >= 0)
+                else if(listboxCurrentCerts.SelectedIndex >= 0 && !ignoreDate)
                 {
                     KeyValuePair<string, string> item = (KeyValuePair<string, string>)listboxCurrentCerts.SelectedItem;
                     if (employee.CertId.Contains(item.Key))
                     {
-                        employee.CertDate[employee.CertId.IndexOf(item.Key)] = "NULL";
-                        if (employee.EditCertId.Contains(item.Key))
+                        if(employee.CertDate[employee.CertId.IndexOf(item.Key)] != "NULL")
                         {
-                            employee.EditCertDate[employee.EditCertId.IndexOf(item.Key)] = "NULL";
-                        }
-                        else
-                        {
-                            employee.EditCertId.Add(item.Key);
-                            employee.EditCertAdditInfo.Add(employee.CertAdditInfo[employee.CertId.IndexOf(item.Key)]);
-                            employee.EditCertDate.Add("NULL");
+                            employee.CertDate[employee.CertId.IndexOf(item.Key)] = "NULL";
+                            if (employee.EditCertId.Contains(item.Key))
+                            {
+                                employee.EditCertDate[employee.EditCertId.IndexOf(item.Key)] = "NULL";
+                            }
+                            else
+                            {
+                                employee.EditCertId.Add(item.Key);
+                                employee.EditCertAdditInfo.Add(employee.CertAdditInfo[employee.CertId.IndexOf(item.Key)]);
+                                employee.EditCertDate.Add("NULL");
+                            }
                         }
                     }
                     else if (employee.AddCertId.Contains(item.Key))
                     {
                         employee.AddCertDate[employee.AddCertId.IndexOf(item.Key)] = "NULL";
-
-
                     }
                     else if (employee.EditCertId.Contains(item.Key))
                     {
                         employee.EditCertDate[employee.EditCertId.IndexOf(item.Key)] = "NULL";
-
                     }
-                    
+
+                }
+                else
+                {
+                    ignoreDate = false;
                 }
             }
         }

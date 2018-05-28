@@ -160,6 +160,7 @@
             // 
             // jobMenu
             // 
+            this.jobMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.jobMenu.BackColor = System.Drawing.SystemColors.ControlLight;
             this.jobMenu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.jobMenu.Controls.Add(this.panelExtraPeop);
@@ -417,6 +418,7 @@
             // 
             // panelEmployees
             // 
+            this.panelEmployees.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panelEmployees.BackColor = System.Drawing.SystemColors.ControlLight;
             this.panelEmployees.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelEmployees.Controls.Add(this.label4);
@@ -598,6 +600,7 @@
             // 
             // certMenu
             // 
+            this.certMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.certMenu.BackColor = System.Drawing.SystemColors.ControlLight;
             this.certMenu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.certMenu.Controls.Add(this.label16);
@@ -715,10 +718,10 @@
             this.Controls.Add(this.buttonEdit);
             this.Controls.Add(this.buttonNew);
             this.Controls.Add(this.menuButton);
-            this.Controls.Add(this.panelEmployees);
-            this.Controls.Add(this.mainGridView);
             this.Controls.Add(this.jobMenu);
             this.Controls.Add(this.certMenu);
+            this.Controls.Add(this.panelEmployees);
+            this.Controls.Add(this.mainGridView);
             this.Name = "FormMain";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.FormMain_Load);
